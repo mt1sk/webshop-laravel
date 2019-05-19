@@ -9,3 +9,11 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+
+/.idea
+
+public/build/stdout
+public/build/log/*.log
+
+public/logs/*.log
+public/logs/*.txt
