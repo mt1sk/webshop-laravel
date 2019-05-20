@@ -20,7 +20,7 @@ Route::get('administrator/logout', 'Admin\LoginController@logout')->name('admini
 
 Route::group(['prefix'=>'administrator', 'middleware'=>['auth:administrator']], function() {
     Route::get('home', function () {
-        return view('welcome');
+        return view('admin.home');
     });
 });
 

@@ -18,11 +18,11 @@ License: You must have a valid license purchased only from templatemonster to le
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <!-- Toggles CSS -->
-    <link href="../vendors/jquery-toggles/css/toggles.css" rel="stylesheet" type="text/css">
-    <link href="../vendors/jquery-toggles/css/themes/toggles-light.css" rel="stylesheet" type="text/css">
+    <link href="/adm/vendors/jquery-toggles/css/toggles.css" rel="stylesheet" type="text/css">
+    <link href="/adm/vendors/jquery-toggles/css/themes/toggles-light.css" rel="stylesheet" type="text/css">
 
     <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="/adm/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <!-- Preloader -->
@@ -42,7 +42,7 @@ License: You must have a valid license purchased only from templatemonster to le
                     <div class="auth-form-wrap pt-xl-0 pt-70">
                         <div class="auth-form w-xl-30 w-lg-55 w-sm-75 w-100">
                             <a class="auth-brand text-center d-block mb-20" href="javascript:;">
-                                <img class="brand-img" src="img/logo-light.png" alt="brand"/>
+                                <img class="brand-img" src="/adm/img/logo-light.png" alt="brand"/>
                             </a>
                             @if(count($errors) > 0)
                                 <div class="alert alert-danger">
@@ -88,22 +88,22 @@ License: You must have a valid license purchased only from templatemonster to le
 <!-- JavaScript -->
 
 <!-- jQuery -->
-<script src="../vendors/jquery/dist/jquery.min.js"></script>
+<script src="/adm/vendors/jquery/dist/jquery.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="../vendors/popper.js/dist/umd/popper.min.js"></script>
-<script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/adm/vendors/popper.js/dist/umd/popper.min.js"></script>
+<script src="/adm/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <!-- Slimscroll JavaScript -->
-<script src="js/jquery.slimscroll.js"></script>
+<script src="/adm/js/jquery.slimscroll.js"></script>
 
 <!-- Fancy Dropdown JS -->
-<script src="js/dropdown-bootstrap-extended.js"></script>
+<script src="/adm/js/dropdown-bootstrap-extended.js"></script>
 
 <!-- FeatherIcons JavaScript -->
-<script src="js/feather.min.js"></script>
+<script src="/adm/js/feather.min.js"></script>
 
 <!-- Init JavaScript -->
-<script src="js/init.js"></script>
+<script src="/adm/js/init.js"></script>
 </body>
 </html>

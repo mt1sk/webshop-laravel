@@ -94,7 +94,7 @@ Project:	Mintos
 /** Imports **/
 /****************************/
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons|Nunito:300,400,400i,600,700);
-@import url(../../vendors/bootstrap/dist/css/bootstrap.min.css);
+@import url(/adm/vendors/bootstrap/dist/css/bootstrap.min.css);
 @import url(font-awesome.min.css);
 @import url(ionicons.min.css);
 @import url(dripicons.css);
@@ -105,8 +105,8 @@ Project:	Mintos
 @import url(linea-icon.css);
 @import url(pe-icon-7-stroke.css);
 @import url(material-design-iconic-font.min.css);
-@import url(../../vendors/owl.carousel/dist/assets/owl.carousel.min.css);
-@import url(../../vendors/owl.carousel/dist/assets/owl.theme.default.min.css);
+@import url(/adm/vendors/owl.carousel/dist/assets/owl.carousel.min.css);
+@import url(/adm/vendors/owl.carousel/dist/assets/owl.theme.default.min.css);
 /*__________________________________________________________________;
 [Mixin]
 Project:	Mintos
