@@ -11,6 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
+Route::get('administrator', 'Admin\LoginController@showLoginForm')->name('administrator.login');
+Route::post('administrator', 'Admin\LoginController@login');
+Route::get('administrator/logout', 'Admin\LoginController@logout')->name('administrator.logout');
+
+Route::group(['prefix'=>'administrator', 'middleware'=>['auth:administrator']], function() {
+    Route::get('home', function () {
+        return view('welcome');
+    });
 });
+
+Auth::routes(['verify' => true]);
