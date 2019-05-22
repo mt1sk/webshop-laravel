@@ -398,3 +398,42 @@
     <!-- /Row -->
 </div>
 @endsection
+
+@section('include_head')
+    <!-- vector map CSS -->
+    <link href="/adm/vendors/vectormap/jquery-jvectormap-2.0.3.css" rel="stylesheet" type="text/css" />
+
+    <!-- Toastr CSS -->
+    <link href="/adm/vendors/jquery-toast-plugin/dist/jquery.toast.min.css" rel="stylesheet" type="text/css">
+@endsection
+
+@section('include_footer')
+
+    <!-- Counter Animation JavaScript -->
+    <script src="/adm/vendors/waypoints/lib/jquery.waypoints.min.js"></script>
+    <script src="/adm/vendors/jquery.counterup/jquery.counterup.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="/adm/vendors/raphael/raphael.min.js"></script>
+    <script src="/adm/vendors/morris.js/morris.min.js"></script>
+
+    <!-- EChartJS JavaScript -->
+    <script src="/adm/vendors/echarts/dist/echarts-en.min.js"></script>
+
+    <!-- Sparkline JavaScript -->
+    <script src="/adm/vendors/jquery.sparkline/dist/jquery.sparkline.min.js"></script>
+
+    <!-- Vector Maps JavaScript -->
+    <script src="/adm/vendors/vectormap/jquery-jvectormap-2.0.3.min.js"></script>
+    <script src="/adm/vendors/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="/adm/js/vectormap-data.js"></script>
+
+    <!-- Owl JavaScript -->
+    <script src="/adm/vendors/owl.carousel/dist/owl.carousel.min.js"></script>
+
+    <!-- Toastr JS -->
+    <script src="/adm/vendors/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
+
+    <!-- Init JavaScript -->
+    <script src="/adm/js/dashboard-data.js"></script>
+@endsection

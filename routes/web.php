@@ -22,6 +22,9 @@ Route::group(['prefix'=>'administrator', 'middleware'=>['auth:administrator']], 
     Route::get('home', function () {
         return view('admin.home');
     });
+
+    Route::get('categories/list', ['as'=>'categories.list', 'uses'=>'Admin\CategoryController']);
+    Route::resource('categories', 'Admin\CategoryController', ['except'=>['index', 'show']]);
 });
 
 Auth::routes(['verify' => true]);
