@@ -208,7 +208,7 @@ License: You must have a valid license purchased only from templatemonster to le
                                         <a class="nav-link" href="{{route('categories.list')}}">Categories</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="javascript:;">Brands</a>
+                                        <a class="nav-link" href="{{route('brands.list')}}">Brands</a>
                                     </li>
                                 </ul>
                             </li>

@@ -10,12 +10,12 @@
                         <i data-feather="package"></i>
                     </span>
                 </span>
-                Categories
+                Brands
             </h4>
         </div>
         <!-- /Title -->
         <div class="hk-pg-header">
-            <a href="{{route('categories.create')}}">
+            <a href="{{route('brands.create')}}">
                 <button type="button" class="btn btn-primary btn-rounded">Create new one</button>
             </a>
         </div>
@@ -39,25 +39,25 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($categories as $category)
-                                                <tr>
-                                                    <td class="col-lg-8">{{$category->name}}</td>
-                                                    <td class="col-lg-1">
-                                                        {{--<div class="custom-control custom-checkbox checkbox-primary">
-                                                            <input type="checkbox" class="custom-control-input" id="list_item_{{$category->id}}" @if($category->enabled) checked @endif >
-                                                            <label class="custom-control-label" for="list_item_{{$category->id}}"></label>
-                                                        </div>--}}
-                                                        <div class="toggle-wrap">
-                                                            <div class="toggle toggle-light toggle-bg-primary toggle2"></div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="col-lg-3 text-center">
-                                                        <a href="{{route('categories.edit', $category->id)}}" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="icon-pencil"></i> </a>
-                                                        <a href="javascript:;" class="mr-25" data-toggle="tooltip" data-original-title="On site"> <i class="pe-7s-next-2"></i> </a>
-                                                        <a href="javascript:;" class="fn_list_del_it"  data-action="{{route('categories.destroy', ['id'=>$category->id])}}" data-toggle="tooltip" data-original-title="Delete"> <i class="icon-trash txt-danger"></i> </a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
+                                        @foreach($brands as $brand)
+                                            <tr>
+                                                <td class="col-lg-8">{{$brand->name}}</td>
+                                                <td class="col-lg-1">
+                                                    {{--<div class="custom-control custom-checkbox checkbox-primary">
+                                                        <input type="checkbox" class="custom-control-input" id="list_item_{{$brand->id}}" @if($brand->enabled) checked @endif >
+                                                        <label class="custom-control-label" for="list_item_{{$brand->id}}"></label>
+                                                    </div>--}}
+                                                    <div class="toggle-wrap">
+                                                        <div class="toggle toggle-light toggle-bg-primary toggle2"></div>
+                                                    </div>
+                                                </td>
+                                                <td class="col-lg-3 text-center">
+                                                    <a href="{{route('brands.edit', $brand->id)}}" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="icon-pencil"></i> </a>
+                                                    <a href="javascript:;" class="mr-25" data-toggle="tooltip" data-original-title="On site"> <i class="pe-7s-next-2"></i> </a>
+                                                    <a href="javascript:;" class="fn_list_del_it"  data-action="{{route('brands.destroy', ['id'=>$brand->id])}}" data-toggle="tooltip" data-original-title="Delete"> <i class="icon-trash txt-danger"></i> </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                     <form class="fn_list_del_it_form d-none" method="POST" action="">
@@ -71,7 +71,7 @@
                     <div class="row">
                         <div class="col-sm">
                             <nav class="pagination-wrap d-inline-block mt-15">
-                                {{$categories->links()}}
+                                {{$brands->links()}}
                             </nav>
                         </div>
                     </div>

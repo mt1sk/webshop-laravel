@@ -25,6 +25,9 @@ Route::group(['prefix'=>'administrator', 'middleware'=>['auth:administrator']], 
 
     Route::get('categories/list', ['as'=>'categories.list', 'uses'=>'Admin\CategoryController']);
     Route::resource('categories', 'Admin\CategoryController', ['except'=>['index', 'show']]);
+
+    Route::get('brands/list')->name('brands.list')->uses('Admin\BrandController');
+    Route::resource('brands', 'Admin\BrandController', ['except'=>['index', 'show']]);
 });
 
 Auth::routes(['verify' => true]);
