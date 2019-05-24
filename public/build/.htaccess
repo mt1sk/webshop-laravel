@@ -1,0 +1,7 @@
+order deny,allow
+deny from all
+
+<Files github.php>
+    order deny,allow
+    allow from all
+</Files>
