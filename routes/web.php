@@ -20,7 +20,10 @@ Route::get('administrator/logout', 'Admin\LoginController@logout')->name('admini
 
 Route::group(['prefix'=>'administrator', 'middleware'=>['auth:administrator']], function() {
     Route::get('home', function () {
-        return view('admin.home');
+        $view = view('admin.home');
+        $view->with('menu_section');
+        $view->with('menu_item');
+        return $view;
     });
 
     Route::get('categories/list', ['as'=>'categories.list', 'uses'=>'Admin\CategoryController']);

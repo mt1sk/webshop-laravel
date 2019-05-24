@@ -15,8 +15,8 @@ License: You must have a valid license purchased only from templatemonster to le
     <meta name="description" content="A responsive bootstrap 4 admin dashboard template by hencework" />
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
     @yield('include_head')
 
@@ -193,34 +193,34 @@ License: You must have a valid license purchased only from templatemonster to le
         <div class="nicescroll-bar">
             <div class="navbar-nav-wrap">
                 <ul class="navbar-nav flex-column">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="javascript:void(0);" aria-expanded="true" data-toggle="collapse" data-target="#dash_drp">
+                    <li class="nav-item @if($menu_section=='catalog') active @endif ">
+                        <a class="nav-link @if($menu_section!='catalog') collapsed @endif" href="javascript:void(0);" aria-expanded="@if($menu_section=='catalog'){{"true"}}@else{{"false"}}@endif" data-toggle="collapse" data-target="#dash_drp">
                             <span class="feather-icon"><i data-feather="package"></i></span>
                             <span class="nav-link-text">Catalog</span>
                         </a>
-                        <ul id="dash_drp" class="nav flex-column collapse collapse-level-1 show">
+                        <ul id="dash_drp" class="nav flex-column collapse collapse-level-1 @if($menu_section=='catalog') show @endif">
                             <li class="nav-item">
                                 <ul class="nav flex-column">
-                                    <li class="nav-item">
+                                    <li class="nav-item @if($menu_item=='products') active @endif">
                                         <a class="nav-link" href="javascript:;">Products</a>
                                     </li>
-                                    <li class="nav-item active">
+                                    <li class="nav-item @if($menu_item=='categories') active @endif">
                                         <a class="nav-link" href="{{route('categories.list')}}">Categories</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <li class="nav-item @if($menu_item=='brands') active @endif">
                                         <a class="nav-link" href="{{route('brands.list')}}">Brands</a>
                                     </li>
                                 </ul>
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-with-badge" href="javascript:void(0);" data-toggle="collapse" data-target="#app_drp">
+                    <li class="nav-item @if($menu_section=='orders') active @endif ">
+                        <a class="nav-link @if($menu_section!='orders') collapsed @endif link-with-badge" href="javascript:void(0);" data-toggle="collapse" data-target="#app_drp">
                             <span class="feather-icon"><i data-feather="activity"></i></span>
                             <span class="nav-link-text">Orders</span>
                             <span class="badge badge-primary badge-pill">4</span>
                         </a>
-                        <ul id="app_drp" class="nav flex-column collapse collapse-level-1">
+                        <ul id="app_drp" class="nav flex-column collapse collapse-level-1 @if($menu_section=='orders') show @endif">
                             <li class="nav-item">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
@@ -304,14 +304,7 @@ License: You must have a valid license purchased only from templatemonster to le
 
     <!-- Main Content -->
     <div class="hk-pg-wrapper">
-        <!-- Breadcrumb -->
-        <nav class="hk-breadcrumb" aria-label="breadcrumb">
-            <ol class="breadcrumb breadcrumb-light bg-transparent">
-                <li class="breadcrumb-item"><a href="#">Catalog</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Categories</li>
-            </ol>
-        </nav>
-        <!-- /Breadcrumb -->
+        <div class="mb-30"></div>
 
         <!-- Container -->
         @yield('content')
