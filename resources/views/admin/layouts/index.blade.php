@@ -202,7 +202,7 @@ License: You must have a valid license purchased only from templatemonster to le
                             <li class="nav-item">
                                 <ul class="nav flex-column">
                                     <li class="nav-item @if($menu_item=='products') active @endif">
-                                        <a class="nav-link" href="javascript:;">Products</a>
+                                        <a class="nav-link" href="{{route('products.list')}}">Products</a>
                                     </li>
                                     <li class="nav-item @if($menu_item=='categories') active @endif">
                                         <a class="nav-link" href="{{route('categories.list')}}">Categories</a>
