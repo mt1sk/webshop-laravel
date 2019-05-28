@@ -33,7 +33,9 @@
                                     <table class="table table-striped mb-0">
                                         <thead>
                                         <tr>
-                                            <th class="col-lg-8">Name</th>
+                                            <th class="col-lg-1"></th>
+                                            <th class="col-lg-6">Name</th>
+                                            <th class="col-lg-1">Bestseller</th>
                                             <th class="col-lg-1">Enable</th>
                                             <th class="col-lg-3 text-center">Action</th>
                                         </tr>
@@ -41,7 +43,12 @@
                                         <tbody>
                                         @foreach($products as $product)
                                             <tr>
-                                                <td class="col-lg-8">{{$product->name}}</td>
+                                                <td class="col-lg-1">
+                                                    @if(!empty($product->image))
+                                                        <img src="{{$product->imageView()}}" width="50" height="50"/>
+                                                    @endif
+                                                </td>
+                                                <td class="col-lg-6">{{$product->name}}</td>
                                                 <td class="col-lg-1">
                                                     {{--<div class="custom-control custom-checkbox checkbox-primary">
                                                         <input type="checkbox" class="custom-control-input" id="list_item_{{$product->id}}" @if($product->enabled) checked @endif >
@@ -51,6 +58,11 @@
                                                         <div class="toggle toggle-light toggle-bg-primary toggle2"></div>
                                                     </div>
                                                 </td>
+                                                <th class="col-lg-1">
+                                                    <div class="toggle-wrap">
+                                                        <div class="toggle toggle-light toggle-bg-primary toggle2"></div>
+                                                    </div>
+                                                </th>
                                                 <td class="col-lg-3 text-center">
                                                     <a href="{{route('products.edit', $product->id)}}" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="icon-pencil"></i> </a>
                                                     <a href="javascript:;" class="mr-25" data-toggle="tooltip" data-original-title="On site"> <i class="pe-7s-next-2"></i> </a>

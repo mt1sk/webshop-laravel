@@ -79,6 +79,10 @@ class ProductController extends IndexController
         $product->category_id = $request->get('category_id');
         $product->brand_id = $request->get('brand_id');
         $product->save();
+        $file = $request->file('image');
+        if (null != $file) {
+            $product->saveImage($file);
+        }
         return redirect()->route('products.edit', ['id'=>$product->id]);
     }
 
@@ -148,6 +152,10 @@ class ProductController extends IndexController
             return redirect()->route('products.edit', ['id'=>$product->id])->withErrors($validator)->withInput();
         }
 
+        if ($request->get('delete_image')) {
+            $product->deleteImage();
+        }
+
         $product->name = $request->get('name');
         $product->url = $request->get('url');
         $product->enabled = $request->filled('enabled');
@@ -160,6 +168,10 @@ class ProductController extends IndexController
         $product->category_id = $request->get('category_id');
         $product->brand_id = $request->get('brand_id');
         $product->save();
+        $file = $request->file('image');
+        if (null != $file) {
+            $product->saveImage($file);
+        }
         return redirect()->route('products.edit', ['id'=>$product->id]);
     }
 

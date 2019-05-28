@@ -12,7 +12,7 @@ class ProductsSeeder extends Seeder
     public function run()
     {
         factory(\App\Product::class, 30)->create()->each(function ($product) {
-            $product->save((array)factory(\App\Product::class)->make());
+            $product->save();
         });
 
         $categories = \App\Category::all('id')->pluck('id')->all();

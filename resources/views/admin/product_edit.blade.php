@@ -32,7 +32,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            <form method="post" action="{{route('products.update', ['id'=>$product->id])}}">
+                            <form method="post" action="{{route('products.update', ['id'=>$product->id])}}" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="_method" value="PUT"/>
                                 <div class="row">
@@ -76,6 +76,33 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
+                                        <div class="form-group ">
+                                            <label for="">Image</label>
+                                            @if(!empty($product->image))
+                                                <div class="fn_image_block">
+                                                    <img src="{{$product->imageView()}}" width="160" height="120">
+                                                    <BR>
+                                                    <a class="fn_delete_image" href="javascript:;">Delete</a>
+                                                </div>
+                                            @endif
+                                            <input class="fn_accept_delete" type="hidden" name="delete_image" value="0" />
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Upload image</span>
+                                                </div>
+                                                <div class="form-control text-truncate" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                                                <span class="input-group-append">
+														<span class=" btn btn-primary btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span>
+                                                <input type="file" name="image">
+                                                </span>
+                                                <a href="#" class="btn btn-secondary fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="brand_id">Brand</label>
                                             <select id="brand_id" name="brand_id" class="form-control select2">
@@ -85,8 +112,6 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="category_id">Category</label>
                                             <select id="category_id" name="category_id" class="form-control select2">
@@ -143,4 +168,14 @@
     <!-- Select2 JavaScript -->
     <script src="/adm/vendors/select2/dist/js/select2.full.min.js"></script>
     <script src="/adm/js/select2-data.js"></script>
+
+    <script>
+        $(function() {
+            $(document).on('click', '.fn_delete_image', function() {
+                $('.fn_image_block').remove();
+                $('.fn_accept_delete').val(1);
+                return false;
+            });
+        });
+    </script>
 @endsection
