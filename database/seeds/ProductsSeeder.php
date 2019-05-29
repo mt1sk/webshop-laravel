@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class ProductsSeeder extends Seeder
 {
@@ -11,6 +12,12 @@ class ProductsSeeder extends Seeder
      */
     public function run()
     {
+        foreach (\App\Product::$originalDir as $dir) {
+            if (!Storage::disk('public')->exists($dir)) {
+                Storage::disk('public')->makeDirectory($dir);
+            }
+        }
+
         factory(\App\Product::class, 30)->create()->each(function ($product) {
             $product->save();
         });

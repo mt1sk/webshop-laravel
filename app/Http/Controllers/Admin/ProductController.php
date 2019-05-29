@@ -83,6 +83,10 @@ class ProductController extends IndexController
         if (null != $file) {
             $product->saveImage($file);
         }
+        $file = $request->file('image2');
+        if (null != $file) {
+            $product->saveImage($file, ['image_num'=>1]);
+        }
         return redirect()->route('products.edit', ['id'=>$product->id]);
     }
 
@@ -155,6 +159,9 @@ class ProductController extends IndexController
         if ($request->get('delete_image')) {
             $product->deleteImage();
         }
+        if ($request->get('delete_image2')) {
+            $product->deleteImage(['image_num'=>1]);
+        }
 
         $product->name = $request->get('name');
         $product->url = $request->get('url');
@@ -171,6 +178,10 @@ class ProductController extends IndexController
         $file = $request->file('image');
         if (null != $file) {
             $product->saveImage($file);
+        }
+        $file = $request->file('image2');
+        if (null != $file) {
+            $product->saveImage($file, ['image_num'=>1]);
         }
         return redirect()->route('products.edit', ['id'=>$product->id]);
     }

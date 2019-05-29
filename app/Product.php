@@ -11,6 +11,7 @@ class Product extends Model
 
     public static $originalDir = [
         'images/products',
+        'images/products2',
     ];
 
     protected $perPage = 20;
@@ -23,6 +24,14 @@ class Product extends Model
     protected function originalDir()
     {
         return self::$originalDir;
+    }
+
+    protected function fieldName()
+    {
+        return [
+            'image',
+            'image2'
+        ];
     }
 
     protected function getId()

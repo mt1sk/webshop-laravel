@@ -30,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Product::deleting(function (Product $product) {
             $product->deleteImage();
+            $product->deleteImage(['image_num'=>1]);
         });
     }
 }
