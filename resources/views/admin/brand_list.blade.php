@@ -33,7 +33,8 @@
                                     <table class="table table-striped mb-0">
                                         <thead>
                                         <tr>
-                                            <th class="col-lg-8">Name</th>
+                                            <th class="col-lg-1"></th>
+                                            <th class="col-lg-7">Name</th>
                                             <th class="col-lg-1">Enable</th>
                                             <th class="col-lg-3 text-center">Action</th>
                                         </tr>
@@ -41,7 +42,12 @@
                                         <tbody>
                                         @foreach($brands as $brand)
                                             <tr>
-                                                <td class="col-lg-8">{{$brand->name}}</td>
+                                                <th class="col-lg-1">
+                                                    @if(!empty($brand->img))
+                                                        <img src="{{$brand->imageView()}}" width="50" height="50"/>
+                                                    @endif
+                                                </th>
+                                                <td class="col-lg-7">{{$brand->name}}</td>
                                                 <td class="col-lg-1">
                                                     {{--<div class="custom-control custom-checkbox checkbox-primary">
                                                         <input type="checkbox" class="custom-control-input" id="list_item_{{$brand->id}}" @if($brand->enabled) checked @endif >

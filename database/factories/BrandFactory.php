@@ -15,5 +15,6 @@ $factory->define(Brand::class, function (Faker $faker) {
         'meta_description' => $name,
         'short_text' => $faker->text(),
         'full_text' => $faker->text(2000),
+        'img' => $faker->image(config('filesystems.disks.public.root').'/'.Brand::$originalDir[0], 640, 480, null, false),
     ];
 });

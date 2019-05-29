@@ -32,7 +32,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            <form method="post" action="{{route('brands.update', $brand->id)}}">
+                            <form method="post" action="{{route('brands.update', $brand->id)}}" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="_method" value="PUT"/>
                                 <div class="row">
@@ -68,6 +68,36 @@
                                             <textarea class="form-control" id="meta_description" name="meta_description">{{$brand->meta_description}}</textarea>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group fn_image_div">
+                                            <label for="">Image</label>
+                                            @if(!empty($brand->img))
+                                                <div class="fn_image_block">
+                                                    <img src="{{$brand->imageView()}}" width="160" height="120">
+                                                    <BR>
+                                                    <a class="fn_delete_image" href="javascript:;">Delete</a>
+                                                </div>
+                                            @endif
+                                            <input class="fn_accept_delete" type="hidden" name="delete_img" value="0" />
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Upload image</span>
+                                                </div>
+                                                <div class="form-control text-truncate" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                                                <span class="input-group-append">
+														<span class=" btn btn-primary btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span>
+                                                <input type="file" name="img">
+                                                </span>
+                                                <a href="#" class="btn btn-secondary fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6"></div>
+
                                     <div class="col-md-12 d-none">
                                         <div class="form-group">
                                             <label>Short description</label>
@@ -108,4 +138,14 @@
 
     <!-- Tinymce Wysuhtml5 Init JavaScript -->
     <script src="/adm/js/tinymce-data.js"></script>
+
+    <script>
+        $(function() {
+            $(document).on('click', '.fn_delete_image', function() {
+                $(this).closest('.fn_image_div').find('.fn_accept_delete').val(1);
+                $(this).closest('.fn_image_block').remove();
+                return false;
+            });
+        });
+    </script>
 @endsection

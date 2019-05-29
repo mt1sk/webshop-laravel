@@ -79,7 +79,7 @@
                                             <label for="">Image</label>
                                             <div class="fileinput fileinput-new input-group" data-provides="fileinput">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text">Upload</span>
+                                                    <span class="input-group-text">Upload image</span>
                                                 </div>
                                                 <div class="form-control text-truncate" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
                                                 <span class="input-group-append">
@@ -94,7 +94,7 @@
                                             <label for="">Image2</label>
                                             <div class="fileinput fileinput-new input-group" data-provides="fileinput">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text">Upload</span>
+                                                    <span class="input-group-text">Upload image</span>
                                                 </div>
                                                 <div class="form-control text-truncate" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
                                                 <span class="input-group-append">

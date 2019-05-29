@@ -66,6 +66,10 @@ class BrandController extends IndexController
         $brand->short_text = $request->get('short_text');
         $brand->full_text = $request->get('full_text');
         $brand->save();
+        $file = $request->file('img');
+        if (null != $file) {
+            $brand->saveImage($file);
+        }
         return redirect()->route('brands.edit', ['id'=>$brand->id]);
     }
 
@@ -135,6 +139,14 @@ class BrandController extends IndexController
         $brand->short_text = $request->get('short_text');
         $brand->full_text = $request->get('full_text');
         $brand->save();
+
+        if ($request->get('delete_img')) {
+            $brand->deleteImage();
+        }
+        $file = $request->file('img');
+        if (null != $file) {
+            $brand->saveImage($file);
+        }
         return redirect()->route('brands.edit', ['id'=>$brand->id]);
     }
 
