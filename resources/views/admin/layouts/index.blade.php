@@ -149,7 +149,11 @@ License: You must have a valid license purchased only from templatemonster to le
                     <div class="media">
                         <div class="media-img-wrap">
                             <div class="avatar">
-                                <img src="/adm/img/avatar12.jpg" alt="user" class="avatar-img rounded-circle">
+                                @if(Auth::user()->photo)
+                                    <img src="{{Auth::user()->imageView()}}" alt="user" class="avatar-img rounded-circle">
+                                @else
+                                    <img src="/adm/img/avatar12.jpg" alt="user" class="avatar-img rounded-circle">
+                                @endif
                             </div>
                             <span class="badge badge-success badge-indicator"></span>
                         </div>
@@ -228,6 +232,25 @@ License: You must have a valid license purchased only from templatemonster to le
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="javascript:;">Orders settings</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item @if($menu_section=='settings') active @endif ">
+                        <a class="nav-link @if($menu_section!='settings') collapsed @endif" href="javascript:void(0);" aria-expanded="@if($menu_section=='settings'){{"true"}}@else{{"false"}}@endif" data-toggle="collapse" data-target="#tables_drp">
+                            <span class="feather-icon"><i data-feather="list"></i></span>
+                            <span class="nav-link-text">Settings</span>
+                        </a>
+                        <ul id="tables_drp" class="nav flex-column collapse collapse-level-1 @if($menu_section=='settings') show @endif">
+                            <li class="nav-item">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item @if($menu_item=='managers') active @endif">
+                                        <a class="nav-link" href="{{route('managers.list')}}">Managers</a>
+                                    </li>
+                                    <li class="nav-item @if($menu_item=='settings') active @endif">
+                                        <a class="nav-link" href="javascript:;">Settings</a>
                                     </li>
                                 </ul>
                             </li>

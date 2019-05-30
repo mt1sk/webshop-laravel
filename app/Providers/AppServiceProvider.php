@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Brand;
+use App\Manager;
 use App\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
@@ -35,6 +36,9 @@ class AppServiceProvider extends ServiceProvider
         });
         Brand::deleting(function (Brand $brand) {
             $brand->deleteImage();
+        });
+        Manager::deleting(function (Manager $manager) {
+            $manager->deleteImage();
         });
     }
 }
