@@ -83,6 +83,28 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    @foreach(\App\Manager::$permissions_all as $permission=>$title)
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox checkbox-primary">
+                                                    <input class="custom-control-input" id="permission_{{$permission}}" name="permissions[]" value="{{$permission}}" @if($errors->isEmpty() || in_array($permission, (array)old('permissions'))) checked="" @endif type="checkbox">
+                                                    <label class="custom-control-label" for="permission_{{$permission}}">{{$title}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @if($loop->iteration % 5 == 0)
+                                            <div class="col-md-2">
+                                                {{--<div class="form-group">
+                                                    <div class="custom-control custom-checkbox checkbox-primary">
+                                                        <input class="custom-control-input" id="all_{{$loop->iteration}}" type="checkbox">
+                                                        <label class="custom-control-label" for="all_{{$loop->iteration}}">All</label>
+                                                    </div>
+                                                </div>--}}
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                                <div class="row">
                                     <div class="col-md-6 form-group">
                                         <button type="submit" class="btn btn-outline-primary btn-rounded">Create</button>
                                     </div>

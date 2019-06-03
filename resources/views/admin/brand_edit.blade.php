@@ -115,11 +115,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6 form-group">
-                                        <button type="submit" class="btn btn-primary btn-rounded">Save</button>
+                                @can('update', $brand)
+                                    <div class="row">
+                                        <div class="col-md-6 form-group">
+                                            <button type="submit" class="btn btn-primary btn-rounded">Save</button>
+                                        </div>
                                     </div>
-                                </div>
+                                @endcan
                             </form>
                         </div>
                     </div>

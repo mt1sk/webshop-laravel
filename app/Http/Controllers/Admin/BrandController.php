@@ -4,12 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class BrandController extends IndexController
 {
     public function __invoke()
     {
+        if (Auth::user()->cant('list', Brand::class)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
         $view = view('admin.brand_list');
         $brands = Brand::paginate();
         $view->with('brands', $brands);
@@ -34,6 +38,9 @@ class BrandController extends IndexController
      */
     public function create()
     {
+        if (Auth::user()->cant('create', Brand::class)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
         $view = view('admin.brand_create');
         $view->with('title', 'New brand');
         return $view;
@@ -47,6 +54,9 @@ class BrandController extends IndexController
      */
     public function store(Request $request)
     {
+        if (Auth::user()->cant('create', Brand::class)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
         $rules = [
             'name'  => 'required',
             'url'   => 'required|unique:brands',
@@ -93,6 +103,9 @@ class BrandController extends IndexController
      */
     public function edit(Request $request, Brand $brand)
     {
+        if (Auth::user()->cant('view', $brand)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
         $view = view('admin.brand_edit');
         $view->with('title', $brand->name);
 
@@ -121,6 +134,9 @@ class BrandController extends IndexController
      */
     public function update(Request $request, Brand $brand)
     {
+        if (Auth::user()->cant('update', $brand)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
         $rules = [
             'name'  => 'required',
             'url'   => 'required|unique:brands,url,'.$brand->id,
@@ -158,6 +174,9 @@ class BrandController extends IndexController
      */
     public function destroy(Brand $brand)
     {
+        if (Auth::user()->cant('delete', $brand)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
         Brand::destroy($brand->id);
         return redirect(url()->previous());
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -11,6 +12,9 @@ class CategoryController extends IndexController
 {
     public function __invoke()
     {
+        if (Auth::user()->cant('list', Category::class)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
         $view = view('admin.category_list');
         $categories = Category::paginate();
         $view->with('categories', $categories);
@@ -35,6 +39,9 @@ class CategoryController extends IndexController
      */
     public function create()
     {
+        if (Auth::user()->cant('create', Category::class)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
         $view = view('admin.category_create');
         $view->with('title', 'New category');
         return $view;
@@ -48,6 +55,9 @@ class CategoryController extends IndexController
      */
     public function store(Request $request)
     {
+        if (Auth::user()->cant('create', Category::class)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
         $rules = [
             'name'  => 'required',
             'url'   => 'required|unique:categories'
@@ -90,6 +100,9 @@ class CategoryController extends IndexController
      */
     public function edit(Request $request, Category $category)
     {
+        if (Auth::user()->cant('view', $category)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
         $view = view('admin.category_edit');
         $view->with('title', $category->name);
 
@@ -118,6 +131,9 @@ class CategoryController extends IndexController
      */
     public function update(Request $request, Category $category)
     {
+        if (Auth::user()->cant('update', $category)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
         $rules = [
             'name'  => 'required',
             'url'   => 'required|unique:categories,url,'.$category->id
@@ -151,6 +167,9 @@ class CategoryController extends IndexController
      */
     public function destroy(Category $category)
     {
+        if (Auth::user()->cant('delete', $category)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
         Category::destroy((int)$category->id);
         return redirect(url()->previous());
     }

@@ -6,6 +6,7 @@ use App\Brand;
 use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends IndexController
@@ -13,6 +14,9 @@ class ProductController extends IndexController
 
     public function __invoke()
     {
+        if (Auth::user()->cant('list', Product::class)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
         $view = view('admin.product_list');
         $products = Product::paginate();
         $view->with('products', $products);
@@ -37,6 +41,9 @@ class ProductController extends IndexController
      */
     public function create()
     {
+        if (Auth::user()->cant('create', Product::class)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
         $view = view('admin.product_create');
         $categories = Category::all();
         $brands = Brand::all();
@@ -55,6 +62,9 @@ class ProductController extends IndexController
      */
     public function store(Request $request)
     {
+        if (Auth::user()->cant('create', Product::class)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
         $rules = [
             'name'  => 'required',
             'url'   => 'required|unique:products',
@@ -110,6 +120,9 @@ class ProductController extends IndexController
      */
     public function edit(Request $request, Product $product)
     {
+        if (Auth::user()->cant('view', $product)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
         $view = view('admin.product_edit');
         $view->with('title', $product->name);
         $categories = Category::all();
@@ -145,6 +158,9 @@ class ProductController extends IndexController
      */
     public function update(Request $request, Product $product)
     {
+        if (Auth::user()->cant('update', $product)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
         $rules = [
             'name'          => 'required',
             'url'           => 'required|unique:products,url,'.$product->id,
@@ -194,6 +210,9 @@ class ProductController extends IndexController
      */
     public function destroy(Product $product)
     {
+        if (Auth::user()->cant('delete', $product)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
         Product::destroy($product->id);
         return redirect(url()->previous());
     }

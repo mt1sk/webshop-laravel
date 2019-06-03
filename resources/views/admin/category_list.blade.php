@@ -15,9 +15,11 @@
         </div>
         <!-- /Title -->
         <div class="hk-pg-header">
-            <a href="{{route('categories.create')}}">
-                <button type="button" class="btn btn-primary btn-rounded">Create new one</button>
-            </a>
+            @can('create', \App\Category::class)
+                <a href="{{route('categories.create')}}">
+                    <button type="button" class="btn btn-primary btn-rounded">Create new one</button>
+                </a>
+            @endcan
         </div>
 
         <!-- Row -->
@@ -52,9 +54,13 @@
                                                         </div>
                                                     </td>
                                                     <td class="col-lg-3 text-center">
-                                                        <a href="{{route('categories.edit', $category->id)}}" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="icon-pencil"></i> </a>
+                                                        @can('view', $category)
+                                                            <a href="{{route('categories.edit', $category->id)}}" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="icon-pencil"></i> </a>
+                                                        @endcan
                                                         <a href="javascript:;" class="mr-25" data-toggle="tooltip" data-original-title="On site"> <i class="pe-7s-next-2"></i> </a>
-                                                        <a href="javascript:;" class="fn_list_del_it"  data-action="{{route('categories.destroy', ['id'=>$category->id])}}" data-toggle="tooltip" data-original-title="Delete"> <i class="icon-trash txt-danger"></i> </a>
+                                                        @can('delete', $category)
+                                                            <a href="javascript:;" class="fn_list_del_it"  data-action="{{route('categories.destroy', ['id'=>$category->id])}}" data-toggle="tooltip" data-original-title="Delete"> <i class="icon-trash txt-danger"></i> </a>
+                                                        @endcan
                                                     </td>
                                                 </tr>
                                             @endforeach

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Manager;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -11,6 +12,10 @@ class ManagerController extends IndexController
 {
     public function __invoke()
     {
+        if (!Auth::user()->can('list', Manager::class)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
+
         $view = view('admin.manager_list');
         $managers = Manager::paginate();
         $view->with('managers', $managers);
@@ -35,6 +40,9 @@ class ManagerController extends IndexController
      */
     public function create()
     {
+        if (Auth::user()->cant('create', Manager::class)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
         $view = view('admin.manager_create');
         $view->with('title', 'New manager');
         return $view;
@@ -48,6 +56,9 @@ class ManagerController extends IndexController
      */
     public function store(Request $request)
     {
+        if (Auth::user()->cant('create', Manager::class)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
         $rules = [
             'name'      => 'required',
             'email'     => 'required|email|unique:managers',
@@ -65,6 +76,7 @@ class ManagerController extends IndexController
         if (!empty($password)) {
             $manager->password = Hash::make($password);
         }
+        $manager->permissions = (array)$request->get('permissions');
         $manager->enabled = $request->filled('enabled');
         $manager->save();
 
@@ -95,6 +107,10 @@ class ManagerController extends IndexController
      */
     public function edit(Request $request, Manager $manager)
     {
+        if (Auth::user()->cant('view', $manager)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
+
         $view = view('admin.manager_edit');
         $view->with('title', $manager->name);
 
@@ -103,6 +119,7 @@ class ManagerController extends IndexController
             $manager->name = $request->old('name');
             $manager->email = $request->old('email');
             $manager->enabled = (bool)$request->old('enabled');
+            $manager->permissions = (array)$request->old('permissions');
         }
 
         $view->with('manager', $manager);
@@ -118,6 +135,9 @@ class ManagerController extends IndexController
      */
     public function update(Request $request, Manager $manager)
     {
+        if (Auth::user()->cant('update', $manager)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
         $rules = [
             'name'      => 'required',
             'email'     => 'required|email|unique:managers,email,'.$manager->id,
@@ -134,6 +154,7 @@ class ManagerController extends IndexController
         if (!empty($password)) {
             $manager->password = Hash::make($password);
         }
+        $manager->permissions = (array)$request->get('permissions');
         $manager->enabled = $request->filled('enabled');
         $manager->save();
 
@@ -155,6 +176,9 @@ class ManagerController extends IndexController
      */
     public function destroy(Manager $manager)
     {
+        if (Auth::user()->cant('delete', $manager)) {
+            return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
+        }
         Manager::destroy($manager->id);
         return redirect(url()->previous());
     }

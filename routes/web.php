@@ -24,7 +24,7 @@ Route::group(['prefix'=>'administrator', 'middleware'=>['auth:administrator']], 
         $view->with('menu_section');
         $view->with('menu_item');
         return $view;
-    });
+    })->name('admin.home');
 
     Route::get('categories/list', ['as'=>'categories.list', 'uses'=>'Admin\CategoryController']);
     Route::resource('categories', 'Admin\CategoryController', ['except'=>['index', 'show']]);

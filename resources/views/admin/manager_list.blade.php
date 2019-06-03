@@ -15,9 +15,11 @@
         </div>
         <!-- /Title -->
         <div class="hk-pg-header">
-            <a href="{{route('managers.create')}}">
-                <button type="button" class="btn btn-primary btn-rounded">Create new one</button>
-            </a>
+            @can('create', \App\Manager::class)
+                <a href="{{route('managers.create')}}">
+                    <button type="button" class="btn btn-primary btn-rounded">Create new one</button>
+                </a>
+            @endcan
         </div>
 
         <!-- Row -->
@@ -54,9 +56,12 @@
                                                     </div>
                                                 </td>
                                                 <td class="col-lg-3 text-center">
-                                                    <a href="{{route('managers.edit', $manager->id)}}" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="icon-pencil"></i> </a>
-                                                    <a href="javascript:;" class="mr-25" data-toggle="tooltip" data-original-title="On site"> <i class="pe-7s-next-2"></i> </a>
-                                                    <a href="javascript:;" class="fn_list_del_it"  data-action="{{route('managers.destroy', ['id'=>$manager->id])}}" data-toggle="tooltip" data-original-title="Delete"> <i class="icon-trash txt-danger"></i> </a>
+                                                    @can('view', $manager)
+                                                        <a href="{{route('managers.edit', $manager->id)}}" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="icon-pencil"></i> </a>
+                                                    @endcan
+                                                    @can('delete', $manager)
+                                                        <a href="javascript:;" class="fn_list_del_it"  data-action="{{route('managers.destroy', ['id'=>$manager->id])}}" data-toggle="tooltip" data-original-title="Delete"> <i class="icon-trash txt-danger"></i> </a>
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach
