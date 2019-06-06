@@ -40,3 +40,7 @@ Route::group(['prefix'=>'administrator', 'middleware'=>['auth:administrator']], 
 });
 
 Auth::routes(['verify' => true]);
+
+Route::get('/', function () {
+    return view('default.layouts.index');
+});
