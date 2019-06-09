@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Brand;
 use App\Category;
+use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -30,6 +31,15 @@ class IndexController extends Controller
         $view = view('default.main');
         $view->with('is_main_page', true);
 
+        $bestseller_products = [];
+        $tm = Product::with('brand')
+            ->where('enabled', 1)
+            ->where('best_seller', 1)
+            ->get();
+        foreach ($tm as $p) {
+            $bestseller_products[$p->brand->name][] = $p;
+        }
+        $view->with('bestseller_products', $bestseller_products);
         $brands = Brand::where('enabled', 1)->get();
         $view->with('brands', $brands);
         return $view;
