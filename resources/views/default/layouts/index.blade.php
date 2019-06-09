@@ -598,19 +598,19 @@
                                     <!-- Thumbnail Large Image start -->
                                     <div class="tab-content">
                                         <div id="thumb1" class="tab-pane fade show active">
-                                            <a data-fancybox="images" href="img/products/35.jpg"><img src="/img/products/35.jpg" alt="product-view"></a>
+                                            <a data-fancybox="images_product_quick" href="/img/products/35.jpg"><img src="/img/products/35.jpg" alt="product-view"></a>
                                         </div>
                                         <div id="thumb2" class="tab-pane fade">
-                                            <a data-fancybox="images" href="img/products/13.jpg"><img src="/img/products/13.jpg" alt="product-view"></a>
+                                            <a data-fancybox="images_product_quick" href="/img/products/13.jpg"><img src="/img/products/13.jpg" alt="product-view"></a>
                                         </div>
                                         <div id="thumb3" class="tab-pane fade">
-                                            <a data-fancybox="images" href="img/products/15.jpg"><img src="/img/products/15.jpg" alt="product-view"></a>
+                                            <a data-fancybox="images_product_quick" href="/img/products/15.jpg"><img src="/img/products/15.jpg" alt="product-view"></a>
                                         </div>
                                         <div id="thumb4" class="tab-pane fade">
-                                            <a data-fancybox="images" href="img/products/4.jpg"><img src="/img/products/4.jpg" alt="product-view"></a>
+                                            <a data-fancybox="images_product_quick" href="/img/products/4.jpg"><img src="/img/products/4.jpg" alt="product-view"></a>
                                         </div>
                                         <div id="thumb5" class="tab-pane fade">
-                                            <a data-fancybox="images" href="img/products/5.jpg"><img src="/img/products/5.jpg" alt="product-view"></a>
+                                            <a data-fancybox="images_product_quick" href="/img/products/5.jpg"><img src="/img/products/5.jpg" alt="product-view"></a>
                                         </div>
                                     </div>
                                     <!-- Thumbnail Large Image End -->

@@ -445,7 +445,7 @@
                                             <div class="single-product">
                                                 <!-- Product Image Start -->
                                                 <div class="pro-img">
-                                                    <a href="javascript:;">
+                                                    <a href="{{route('product_page', ['url'=>$p->url])}}">
                                                         @if(!empty($p->image))
                                                             <img class="primary-img" src="{{$p->imageView()}}" alt="{{$p->name}}">
                                                         @else
@@ -464,7 +464,7 @@
                                                 <!-- Product Content Start -->
                                                 <div class="pro-content">
                                                     <div class="pro-info">
-                                                        <h4><a href="javascript:;">{{$p->name}}</a></h4>
+                                                        <h4><a href="{{route('product_page', ['url'=>$p->url])}}">{{$p->name}}</a></h4>
                                                         <p>
                                                             <span class="price">$84.45</span>
                                                             {{--<del class="prev-price">$300.50</del>--}}
@@ -501,7 +501,7 @@
                                             <!-- Product Image Start -->
                                             <div class="col-lg-4 col-md-5 col-sm-12">
                                                 <div class="pro-img">
-                                                    <a href="javascript:;">
+                                                    <a href="{{route('product_page', ['url'=>$p->url])}}">
                                                         @if(!empty($p->image))
                                                             <img class="primary-img" src="{{$p->imageView()}}" alt="{{$p->name}}">
                                                         @else
@@ -523,7 +523,7 @@
                                             <!-- Product Content Start -->
                                             <div class="col-lg-8 col-md-7 col-sm-12">
                                                 <div class="pro-content hot-product2">
-                                                    <h4><a href="javascript:;">{{$p->name}}</a></h4>
+                                                    <h4><a href="{{route('product_page', ['url'=>$p->url])}}">{{$p->name}}</a></h4>
                                                     <p>
                                                         <span class="price">$199.19</span>
                                                         {{--<del class="prev-price">$205.50</del>--}}
