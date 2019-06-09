@@ -4,39 +4,42 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Home || Truemart Responsive Html5 Ecommerce Template</title>
+    <title>{{$meta_title}}</title>
+    <meta name="keywords" content="{{$meta_keywords}}" />
+    <meta name="description" content="{{$meta_description}}" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicons -->
-    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="shortcut icon" href="/img/favicon.ico">
     <!-- Fontawesome css -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!-- Ionicons css -->
-    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="/css/ionicons.min.css">
     <!-- linearicons css -->
-    <link rel="stylesheet" href="css/linearicons.css">
+    <link rel="stylesheet" href="/css/linearicons.css">
     <!-- Nice select css -->
-    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="/css/nice-select.css">
     <!-- Jquery fancybox css -->
-    <link rel="stylesheet" href="css/jquery.fancybox.css">
+    <link rel="stylesheet" href="/css/jquery.fancybox.css">
     <!-- Jquery ui price slider css -->
-    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="/css/jquery-ui.min.css">
     <!-- Meanmenu css -->
-    <link rel="stylesheet" href="css/meanmenu.min.css">
+    <link rel="stylesheet" href="/css/meanmenu.min.css">
     <!-- Nivo slider css -->
-    <link rel="stylesheet" href="css/nivo-slider.css">
+    <link rel="stylesheet" href="/css/nivo-slider.css">
     <!-- Owl carousel css -->
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
     <!-- Bootstrap css -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <!-- Custom css -->
-    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="/css/default.css">
     <!-- Main css -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <!-- Responsive css -->
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="/css/responsive.css">
 
     <!-- Modernizer js -->
-    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="/js/vendor/modernizr-3.5.0.min.js"></script>
 </head>
 
 <body>
@@ -62,8 +65,8 @@
                         <li><span>Language</span> <a href="#">English<i class="lnr lnr-chevron-down"></i></a>
                             <!-- Dropdown Start -->
                             <ul class="ht-dropdown">
-                                <li><a href="#"><img src="img/header/1.jpg" alt="language-selector">English</a></li>
-                                <li><a href="#"><img src="img/header/2.jpg" alt="language-selector">Francis</a></li>
+                                <li><a href="#"><img src="/img/header/1.jpg" alt="language-selector">English</a></li>
+                                <li><a href="#"><img src="/img/header/2.jpg" alt="language-selector">Francis</a></li>
                             </ul>
                             <!-- Dropdown End -->
                         </li>
@@ -97,7 +100,7 @@
                 <div class="row align-items-center no-gutters">
                     <div class="col-lg-3 col-md-12">
                         <div class="logo mb-all-30">
-                            <a href="index.html"><img src="img/logo/logo.png" alt="logo-image"></a>
+                            <a href="index.html"><img src="/img/logo/logo.png" alt="logo-image"></a>
                         </div>
                     </div>
                     <!-- Categorie Search Box Start Here -->
@@ -151,7 +154,7 @@
                                             <!-- Cart Box Start -->
                                             <div class="single-cart-box">
                                                 <div class="cart-img">
-                                                    <a href="#"><img src="img/products/1.jpg" alt="cart-image"></a>
+                                                    <a href="#"><img src="/img/products/1.jpg" alt="cart-image"></a>
                                                     <span class="pro-quantity">1X</span>
                                                 </div>
                                                 <div class="cart-content">
@@ -166,7 +169,7 @@
                                             <!-- Cart Box Start -->
                                             <div class="single-cart-box">
                                                 <div class="cart-img">
-                                                    <a href="#"><img src="img/products/2.jpg" alt="cart-image"></a>
+                                                    <a href="#"><img src="/img/products/2.jpg" alt="cart-image"></a>
                                                     <span class="pro-quantity">1X</span>
                                                 </div>
                                                 <div class="cart-content">
@@ -324,70 +327,11 @@
                 <nav>
                     <div id="cate-mobile-toggle" class="category-menu sidebar-menu sidbar-style mobile-categorei-menu-list menu-hidden ">
                         <ul>
-                            <li class="has-sub"><a href="#">Automotive & Motorcycle </a>
-                                <ul class="category-sub">
-                                    <li class="has-sub"><a href="shop.html">Office chair</a>
-                                        <ul class="category-sub">
-                                            <li><a href="shop.html">Bibendum Cursus</a></li>
-                                            <li><a href="shop.html">Dignissim Turpis</a></li>
-                                            <li><a href="shop.html">Dining room</a></li>
-                                            <li><a href="shop.html">Dining room</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="has-sub"><a href="shop.html">Purus Lacus</a>
-                                        <ul class="category-sub">
-                                            <li><a href="shop.html">Magna Pellentesq</a></li>
-                                            <li><a href="shop.html">Molestie Tortor</a></li>
-                                            <li><a href="shop.html">Vehicula Element</a></li>
-                                            <li><a href="shop.html">Sagittis Blandit</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="shop.html">gps accessories</a></li>
-                                    <li><a href="shop.html">Microphones</a></li>
-                                    <li><a href="shop.html">Wireless Transmitters</a></li>
-                                </ul>
-                                <!-- category submenu end-->
-                            </li>
-                            <li class="has-sub"><a href="#">Sports & Outdoors</a>
-                                <ul class="category-sub">
-                                    <li class="menu-tile">Cameras</li>
-                                    <li><a href="shop.html">Cords and Cables</a></li>
-                                    <li><a href="shop.html">gps accessories</a></li>
-                                    <li><a href="shop.html">Microphones</a></li>
-                                    <li><a href="shop.html">Wireless Transmitters</a></li>
-                                </ul>
-                                <!-- category submenu end-->
-                            </li>
-                            <li class="has-sub"><a href="#">Home & Kitchen</a>
-                                <ul class="category-sub">
-                                    <li><a href="shop.html">kithen one</a></li>
-                                    <li><a href="shop.html">kithen two</a></li>
-                                    <li><a href="shop.html">kithen three</a></li>
-                                    <li><a href="shop.html">kithen four</a></li>
-                                </ul>
-                                <!-- category submenu end-->
-                            </li>
-                            <li class="has-sub"><a href="#">Phones & Tablets</a>
-                                <ul class="category-sub">
-                                    <li><a href="shop.html">phone one</a></li>
-                                    <li><a href="shop.html">Tablet two</a></li>
-                                    <li><a href="shop.html">Tablet three</a></li>
-                                    <li><a href="shop.html">phone four</a></li>
-                                </ul>
-                                <!-- category submenu end-->
-                            </li>
-                            <li class="has-sub"><a href="#">TV & Video</a>
-                                <ul class="category-sub">
-                                    <li><a href="shop.html">smart tv</a></li>
-                                    <li><a href="shop.html">real video</a></li>
-                                    <li><a href="shop.html">Microphones</a></li>
-                                    <li><a href="shop.html">Wireless Transmitters</a></li>
-                                </ul>
-                                <!-- category submenu end-->
-                            </li>
-                            <li><a href="#">Beauty</a> </li>
-                            <li><a href="#">Sport & tourisim</a></li>
-                            <li><a href="#">Meat & Seafood</a></li>
+                            @foreach($categories as $c)
+                                <li>
+                                    <a href="{{route('category_page', ['url'=>$c->url])}}">{{$c->name}}</a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                     <!-- category-menu-end -->
@@ -408,11 +352,11 @@
                         <div class="vertical-menu mb-all-30">
                             <nav>
                                 <ul class="vertical-menu-list">
-                                    @foreach($categories as $category)
+                                    @foreach($categories as $c)
                                         <li>
-                                            <a href="javascript:;">
-                                                {{--<span><img src="img/vertical-menu/5.png" alt="menu-icon"></span>--}}
-                                                {{$category->name}}
+                                            <a href="{{route('category_page', ['url'=>$c->url])}}">
+                                                {{--<span><img src="/img/vertical-menu/5.png" alt="menu-icon"></span>--}}
+                                                {{$c->name}}
                                             </a>
                                         </li>
                                     @endforeach
@@ -421,7 +365,7 @@
                                         <ul>
                                             <li class="has-sub"><a href="#">More Categories</a>
                                                 <ul class="category-sub">
-                                                    <li><a href="shop.html"><span><img src="img/vertical-menu/11.png" alt="menu-icon"></span>Accessories</a></li>
+                                                    <li><a href="shop.html"><span><img src="/img/vertical-menu/11.png" alt="menu-icon"></span>Accessories</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -440,8 +384,8 @@
                         <div class="slider-wrapper theme-default">
                             <!-- Slider Background  Image Start-->
                             <div id="slider" class="nivoSlider">
-                                <a href="shop.html"><img src="img/slider/1.jpg" data-thumb="img/slider/1.jpg" alt="" title="#htmlcaption" /></a>
-                                <a href="shop.html"><img src="img/slider/2.jpg" data-thumb="img/slider/2.jpg" alt="" title="#htmlcaption2" /></a>
+                                <a href="shop.html"><img src="/img/slider/1.jpg" data-thumb="img/slider/1.jpg" alt="" title="#htmlcaption" /></a>
+                                <a href="shop.html"><img src="/img/slider/2.jpg" data-thumb="img/slider/2.jpg" alt="" title="#htmlcaption2" /></a>
                             </div>
                             <!-- Slider Background  Image Start-->
                         </div>
@@ -615,7 +559,7 @@
                                     </li>
                                 </ul>
                                 <div class="payment mt-25 bdr-top pt-30">
-                                    <a href="#"><img class="img" src="img/payment/1.png" alt="payment-image"></a>
+                                    <a href="#"><img class="img" src="/img/payment/1.png" alt="payment-image"></a>
                                 </div>
                             </div>
                         </div>
@@ -636,8 +580,8 @@
                         <li><a href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
                         <li><a href="https://plus.google.com/"><i class="fa fa-google-plus"></i></a></li>
                         <li><a href="https://www.linkedin.com/"><i class="fa fa-linkedin"></i></a></li>
-                        <li><a href="#"><img src="img/icon/social-img1.png" alt="google play"></a></li>
-                        <li><a href="#"><img src="img/icon/social-img2.png" alt="app store"></a></li>
+                        <li><a href="#"><img src="/img/icon/social-img1.png" alt="google play"></a></li>
+                        <li><a href="#"><img src="/img/icon/social-img2.png" alt="app store"></a></li>
                     </ul>
                 </div>
             </div>
@@ -677,30 +621,30 @@
                                     <!-- Thumbnail Large Image start -->
                                     <div class="tab-content">
                                         <div id="thumb1" class="tab-pane fade show active">
-                                            <a data-fancybox="images" href="img/products/35.jpg"><img src="img/products/35.jpg" alt="product-view"></a>
+                                            <a data-fancybox="images" href="img/products/35.jpg"><img src="/img/products/35.jpg" alt="product-view"></a>
                                         </div>
                                         <div id="thumb2" class="tab-pane fade">
-                                            <a data-fancybox="images" href="img/products/13.jpg"><img src="img/products/13.jpg" alt="product-view"></a>
+                                            <a data-fancybox="images" href="img/products/13.jpg"><img src="/img/products/13.jpg" alt="product-view"></a>
                                         </div>
                                         <div id="thumb3" class="tab-pane fade">
-                                            <a data-fancybox="images" href="img/products/15.jpg"><img src="img/products/15.jpg" alt="product-view"></a>
+                                            <a data-fancybox="images" href="img/products/15.jpg"><img src="/img/products/15.jpg" alt="product-view"></a>
                                         </div>
                                         <div id="thumb4" class="tab-pane fade">
-                                            <a data-fancybox="images" href="img/products/4.jpg"><img src="img/products/4.jpg" alt="product-view"></a>
+                                            <a data-fancybox="images" href="img/products/4.jpg"><img src="/img/products/4.jpg" alt="product-view"></a>
                                         </div>
                                         <div id="thumb5" class="tab-pane fade">
-                                            <a data-fancybox="images" href="img/products/5.jpg"><img src="img/products/5.jpg" alt="product-view"></a>
+                                            <a data-fancybox="images" href="img/products/5.jpg"><img src="/img/products/5.jpg" alt="product-view"></a>
                                         </div>
                                     </div>
                                     <!-- Thumbnail Large Image End -->
                                     <!-- Thumbnail Image End -->
                                     <div class="product-thumbnail mt-20">
                                         <div class="thumb-menu owl-carousel nav tabs-area" role="tablist">
-                                            <a class="active" data-toggle="tab" href="#thumb1"><img src="img/products/35.jpg" alt="product-thumbnail"></a>
-                                            <a data-toggle="tab" href="#thumb2"><img src="img/products/13.jpg" alt="product-thumbnail"></a>
-                                            <a data-toggle="tab" href="#thumb3"><img src="img/products/15.jpg" alt="product-thumbnail"></a>
-                                            <a data-toggle="tab" href="#thumb4"><img src="img/products/4.jpg" alt="product-thumbnail"></a>
-                                            <a data-toggle="tab" href="#thumb5"><img src="img/products/5.jpg" alt="product-thumbnail"></a>
+                                            <a class="active" data-toggle="tab" href="#thumb1"><img src="/img/products/35.jpg" alt="product-thumbnail"></a>
+                                            <a data-toggle="tab" href="#thumb2"><img src="/img/products/13.jpg" alt="product-thumbnail"></a>
+                                            <a data-toggle="tab" href="#thumb3"><img src="/img/products/15.jpg" alt="product-thumbnail"></a>
+                                            <a data-toggle="tab" href="#thumb4"><img src="/img/products/4.jpg" alt="product-thumbnail"></a>
+                                            <a data-toggle="tab" href="#thumb5"><img src="/img/products/5.jpg" alt="product-thumbnail"></a>
                                         </div>
                                     </div>
                                     <!-- Thumbnail image end -->
@@ -769,31 +713,31 @@
 <!-- Main Wrapper End Here -->
 
 <!-- jquery 3.2.1 -->
-<script src="js/vendor/jquery-3.2.1.min.js"></script>
+<script src="/js/vendor/jquery-3.2.1.min.js"></script>
 <!-- Countdown js -->
-<script src="js/jquery.countdown.min.js"></script>
+<script src="/js/jquery.countdown.min.js"></script>
 <!-- Mobile menu js -->
-<script src="js/jquery.meanmenu.min.js"></script>
+<script src="/js/jquery.meanmenu.min.js"></script>
 <!-- ScrollUp js -->
-<script src="js/jquery.scrollUp.js"></script>
+<script src="/js/jquery.scrollUp.js"></script>
 <!-- Nivo slider js -->
-<script src="js/jquery.nivo.slider.js"></script>
+<script src="/js/jquery.nivo.slider.js"></script>
 <!-- Fancybox js -->
-<script src="js/jquery.fancybox.min.js"></script>
+<script src="/js/jquery.fancybox.min.js"></script>
 <!-- Jquery nice select js -->
-<script src="js/jquery.nice-select.min.js"></script>
+<script src="/js/jquery.nice-select.min.js"></script>
 <!-- Jquery ui price slider js -->
-<script src="js/jquery-ui.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
 <!-- Owl carousel -->
-<script src="js/owl.carousel.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
 <!-- Bootstrap popper js -->
-<script src="js/popper.min.js"></script>
+<script src="/js/popper.min.js"></script>
 <!-- Bootstrap js -->
-<script src="js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 <!-- Plugin js -->
-<script src="js/plugins.js"></script>
+<script src="/js/plugins.js"></script>
 <!-- Main activaion js -->
-<script src="js/main.js"></script>
+<script src="/js/main.js"></script>
 </body>
 
 </html>

@@ -42,3 +42,4 @@ Route::group(['prefix'=>'administrator', 'middleware'=>['auth:administrator']], 
 Auth::routes(['verify' => true]);
 
 Route::get('/', ['as'=>'main_page', 'uses'=>'IndexController']);
+Route::get('/categories/{url}', 'CategoryController@productsList')->name('category_page');

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Brand;
 use App\Category;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
 class IndexController extends Controller
@@ -14,7 +14,9 @@ class IndexController extends Controller
     {
         $categories = Category::where('enabled', 1)->get();
         View::share('categories', $categories);
-        View::share('title', 'main');
+        View::share('meta_title', 'default');
+        View::share('meta_keywords', 'default');
+        View::share('meta_description', 'default');
     }
 
     /**
