@@ -1199,17 +1199,17 @@
 
                 <!-- Hot Deal Product Activation Start -->
                 <div class="hot-deal-active owl-carousel">
-                    @foreach($brands as $brand)
+                    @foreach($brands as $b)
                         <div class="single-product">
                             <!-- Product Image Start -->
                             <div class="pro-img">
-                                <a href="javascript:;">
-                                    @if(!empty($brand->img))
-                                        <img class="primary-img" src="{{$brand->imageView()}}" alt="{{$brand->name}}">
-                                        <img class="secondary-img" src="{{$brand->imageView()}}" alt="{{$brand->name}}">
+                                <a href="{{route('brand_page', ['url'=>$b->url])}}">
+                                    @if(!empty($b->img))
+                                        <img class="primary-img" src="{{$b->imageView()}}" alt="{{$b->name}}">
+                                        <img class="secondary-img" src="{{$b->imageView()}}" alt="{{$b->name}}">
                                     @else
-                                        <img class="primary-img" src="/img/products/1.jpg" alt="{{$brand->name}}">
-                                        <img class="secondary-img" src="/img/products/7.jpg" alt="{{$brand->name}}">
+                                        <img class="primary-img" src="/img/products/1.jpg" alt="{{$b->name}}">
+                                        <img class="secondary-img" src="/img/products/7.jpg" alt="{{$b->name}}">
                                     @endif
                                 </a>
                             </div>
@@ -1217,11 +1217,11 @@
                             <!-- Product Content Start -->
                             <div class="pro-content">
                                 <div class="pro-info">
-                                    <h4><a href="javascript:;">{{$brand->name}}</a></h4>
+                                    <h4><a href="{{route('brand_page', ['url'=>$b->url])}}">{{$b->name}}</a></h4>
                                 </div>
                                 <div class="pro-actions">
                                     <div class="actions-primary">
-                                        <a href="javascript:;">Show on page</a>
+                                        <a href="{{route('brand_page', ['url'=>$b->url])}}">Show on page</a>
                                     </div>
                                 </div>
                             </div>

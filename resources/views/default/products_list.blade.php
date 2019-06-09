@@ -7,7 +7,13 @@
             <div class="breadcrumb">
                 <ul class="d-flex align-items-center">
                     <li><a href="{{route('main_page')}}">Home</a></li>
-                    <li class="active"><a href="javascript:;">{{$category->name}}</a></li>
+                    @isset($category)
+                        <li class="active"><a href="javascript:;">{{$category->name}}</a></li>
+                    @endisset
+                    @isset($brand)
+                        <li><a href="{{route('brands_list')}}">Brands</a></li>
+                        <li class="active"><a href="javascript:;">{{$brand->name}}</a></li>
+                    @endisset
                 </ul>
             </div>
         </div>
@@ -67,6 +73,7 @@
                             <!-- category-menu-end -->
                         </div>
                         <!-- Sidebar Electronics Categorie End -->
+
                         <!-- Price Filter Options Start -->
                         <div class="search-filter mb-40">
                             <h3 class="sidebar-title">filter by price</h3>
@@ -76,6 +83,7 @@
                             </form>
                         </div>
                         <!-- Price Filter Options End -->
+
                         <!-- Sidebar Categorie Start -->
                         <div class="sidebar-categorie mb-40">
                             <h3 class="sidebar-title">categories</h3>
@@ -99,6 +107,7 @@
                             </ul>
                         </div>
                         <!-- Sidebar Categorie Start -->
+
                         <!-- Product Size Start -->
                         <div class="size mb-40">
                             <h3 class="sidebar-title">size</h3>
@@ -118,6 +127,7 @@
                             </ul>
                         </div>
                         <!-- Product Size End -->
+
                         <!-- Product Color Start -->
                         <div class="color mb-40">
                             <h3 class="sidebar-title">color</h3>
@@ -141,9 +151,10 @@
                             </ul>
                         </div>
                         <!-- Product Color End -->
+
                         <!-- Product Top Start -->
                         <div class="top-new mb-40">
-                            <h3 class="sidebar-title">Top New</h3>
+                            <h3 class="sidebar-title">Recently viewed</h3>
                             <div class="side-product-active owl-carousel">
                                 <!-- Side Item Start -->
                                 <div class="side-pro-item">
@@ -378,11 +389,6 @@
                             </div>
                         </div>
                         <!-- Product Top End -->
-                        <!-- Single Banner Start -->
-                        <div class="col-img">
-                            <a href="shop.html"><img src="/img/banner/banner-sidebar.jpg" alt="slider-banner"></a>
-                        </div>
-                        <!-- Single Banner End -->
                     </div>
                 </div>
                 <!-- Sidebar Shopping Option End -->

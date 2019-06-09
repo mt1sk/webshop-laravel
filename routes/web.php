@@ -43,3 +43,5 @@ Auth::routes(['verify' => true]);
 
 Route::get('/', ['as'=>'main_page', 'uses'=>'IndexController']);
 Route::get('/categories/{url}', 'CategoryController@productsList')->name('category_page');
+Route::get('/brands', 'BrandController@brandsList')->name('brands_list');
+Route::get('/brands/{url}', 'BrandController@productsList')->name('brand_page');

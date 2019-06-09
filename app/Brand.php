@@ -15,6 +15,11 @@ class Brand extends Model
 
     protected $perPage = 20;
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     protected function originalDir()
     {
         return self::$originalDir;
