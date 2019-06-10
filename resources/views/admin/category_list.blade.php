@@ -57,7 +57,7 @@
                                                         @can('view', $category)
                                                             <a href="{{route('categories.edit', $category->id)}}" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="icon-pencil"></i> </a>
                                                         @endcan
-                                                        <a href="javascript:;" class="mr-25" data-toggle="tooltip" data-original-title="On site"> <i class="pe-7s-next-2"></i> </a>
+                                                        <a href="{{route('category_page', ['url'=>$category->url])}}" target="_blank" class="mr-25" data-toggle="tooltip" data-original-title="On site"> <i class="pe-7s-next-2"></i> </a>
                                                         @can('delete', $category)
                                                             <a href="javascript:;" class="fn_list_del_it"  data-action="{{route('categories.destroy', ['id'=>$category->id])}}" data-toggle="tooltip" data-original-title="Delete"> <i class="icon-trash txt-danger"></i> </a>
                                                         @endcan

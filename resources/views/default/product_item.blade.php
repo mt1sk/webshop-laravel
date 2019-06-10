@@ -27,10 +27,14 @@
             <div class="pro-info">
                 <h4><a href="{{route('product_page', ['url'=>$p->url])}}">{{$p->name}}</a></h4>
                 <p>
-                    <span class="price">$84.45</span>
-                    {{--<del class="prev-price">$300.50</del>--}}
+                    <span class="price">${{$p->price}}</span>
+                    @if(!is_null($p->old_price))
+                        <del class="prev-price">${{$p->old_price}}</del>
+                    @endif
                 </p>
-                {{--<div class="label-product l_sale">25<span class="symbol-percent">%</span></div>--}}
+                @if(!is_null($p->old_price))
+                    <div class="label-product l_sale">{{$p->discountAmount}}<span class="symbol-percent">%</span></div>
+                @endif
             </div>
             <div class="pro-actions">
                 <div class="actions-primary">
@@ -43,8 +47,12 @@
             </div>
         </div>
         <!-- Product Content End -->
-        {{--<span class="sticker-new">new</span>
-        <span class="sticker-sale">sale</span>--}}
+        @if($p->isNew)
+            <span class="sticker-new">new</span>
+        @endif
+        @if(!is_null($p->old_price))
+            <span class="sticker-sale">sale</span>
+        @endif
     </div>
 @isset($params['is_catalog'])
 </div>

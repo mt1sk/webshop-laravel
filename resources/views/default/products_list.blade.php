@@ -482,7 +482,7 @@
                                                         <span class="price">$199.19</span>
                                                         {{--<del class="prev-price">$205.50</del>--}}
                                                     </p>
-                                                    <p>{{$p->short_text}}</p>
+                                                    <p>{!! $p->short_text !!}</p>
                                                     <div class="pro-actions">
                                                         <div class="actions-primary">
                                                             <a href="javascript:;" title="" data-original-title="Add to Cart"> + Add To Cart</a>

@@ -63,7 +63,7 @@
                                                     @can('view', $brand)
                                                         <a href="{{route('brands.edit', $brand->id)}}" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="icon-pencil"></i> </a>
                                                     @endcan
-                                                    <a href="javascript:;" class="mr-25" data-toggle="tooltip" data-original-title="On site"> <i class="pe-7s-next-2"></i> </a>
+                                                    <a href="{{route('brand_page', ['url'=>$brand->url])}}" target="_blank" class="mr-25" data-toggle="tooltip" data-original-title="On site"> <i class="pe-7s-next-2"></i> </a>
                                                     @can('delete', $brand)
                                                         <a href="javascript:;" class="fn_list_del_it"  data-action="{{route('brands.destroy', ['id'=>$brand->id])}}" data-toggle="tooltip" data-original-title="Delete"> <i class="icon-trash txt-danger"></i> </a>
                                                     @endcan

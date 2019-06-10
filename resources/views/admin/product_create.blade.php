@@ -46,6 +46,22 @@
                                             <input class="form-control" id="url" name="url" placeholder="" value="{{old('url')}}" type="text">
                                         </div>
 
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="price">Price</label>
+                                                    <input class="form-control" id="price" name="price" placeholder="" value="{{old('price')}}" type="text">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="old_price">Old price</label>
+                                                    <input class="form-control" id="old_price" name="old_price" placeholder="" value="{{old('old_price')}}" type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox checkbox-primary">
                                                 <input class="custom-control-input" id="enabled" name="enabled" @if(old('enabled') || $errors->isEmpty()) checked="" @endif type="checkbox">

@@ -26,6 +26,16 @@ class Product extends Model
         return $this->belongsTo(Brand::class);
     }
 
+    public function getIsNewAttribute()
+    {
+        return strtotime($this->created_at) > time() - 3600 * 24 * 30;
+    }
+
+    public function getDiscountAmountAttribute()
+    {
+        return is_null($this->old_price) ? 0 : round(100 - $this->price / $this->old_price * 100, 2);
+    }
+
     protected function originalDir()
     {
         return self::$originalDir;

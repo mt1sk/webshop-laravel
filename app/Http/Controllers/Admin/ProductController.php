@@ -70,6 +70,8 @@ class ProductController extends IndexController
             'url'   => 'required|unique:products',
             'category_id'   => 'integer|nullable',
             'brand_id'      => 'integer|nullable',
+            'price'         => 'required|numeric|min:0',
+            'old_price'     => 'numeric|nullable|min:0.01|gt:price',
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
@@ -88,6 +90,8 @@ class ProductController extends IndexController
         $product->full_text = $request->get('full_text');
         $product->category_id = $request->get('category_id');
         $product->brand_id = $request->get('brand_id');
+        $product->price = $request->get('price');
+        $product->old_price = $request->get('old_price');
         $product->save();
         $file = $request->file('image');
         if (null != $file) {
@@ -141,6 +145,8 @@ class ProductController extends IndexController
             $product->full_text = $request->old('full_text');
             $product->category_id = $request->old('category_id');
             $product->brand_id = $request->old('brand_id');
+            $product->price = $request->old('price');
+            $product->old_price = $request->old('old_price');
         }
 
         $view->with('categories', $categories);
@@ -166,6 +172,8 @@ class ProductController extends IndexController
             'url'           => 'required|unique:products,url,'.$product->id,
             'category_id'   => 'integer|nullable',
             'brand_id'      => 'integer|nullable',
+            'price'         => 'required|numeric|min:0',
+            'old_price'     => 'numeric|nullable|min:0.01|gt:price',
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
@@ -190,6 +198,8 @@ class ProductController extends IndexController
         $product->full_text = $request->get('full_text');
         $product->category_id = $request->get('category_id');
         $product->brand_id = $request->get('brand_id');
+        $product->price = $request->get('price');
+        $product->old_price = $request->get('old_price');
         $product->save();
         $file = $request->file('image');
         if (null != $file) {

@@ -63,7 +63,7 @@
                                     @endif
                                 </a>
                                 <a data-toggle="tab" href="#thumb2">
-                                    @if(!empty($product->image))
+                                    @if(!empty($product->image2))
                                         <img src="{{$product->imageView(1)}}" alt="{{$product->name}}">
                                     @else
                                         <img src="/img/products/13.jpg" alt="{{$product->name}}">
@@ -93,9 +93,17 @@
                                 </div>
                             </div>
                             <div class="pro-price mtb-30">
-                                <p class="d-flex align-items-center"><span class="prev-price">16.51</span><span class="price">$15.19</span><span class="saving-price">save 8%</span></p>
+                                <p class="d-flex align-items-center">
+                                    @if(!is_null($product->old_price))
+                                        <span class="prev-price">${{$product->old_price}}</span>
+                                    @endif
+                                    <span class="price">${{$product->price}}</span>
+                                    @if(!is_null($product->old_price))
+                                        <span class="saving-price">save {{$product->discountAmount}}%</span>
+                                    @endif
+                                </p>
                             </div>
-                            <p class="mb-20 pro-desc-details">{{$product->short_text}}</p>
+                            <p class="mb-20 pro-desc-details">{!! $product->short_text !!}</p>
                             <div class="product-size mb-20 clearfix">
                                 <label>Size</label>
                                 <select class="">
@@ -164,7 +172,7 @@
                     <!-- Product Thumbnail Tab Content Start -->
                     <div class="tab-content thumb-content border-default">
                         <div id="dtail" class="tab-pane fade show active">
-                            <p>{{$product->full_text}}</p>
+                            <p>{!! $product->full_text !!}</p>
                         </div>
                         <div id="review" class="tab-pane fade">
                             <!-- Reviews Start -->
