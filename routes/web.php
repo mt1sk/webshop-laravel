@@ -40,6 +40,8 @@ Route::group(['prefix'=>'administrator', 'middleware'=>['auth:administrator']], 
 });
 
 Auth::routes(['verify' => true]);
+Route::get('/user', 'UserController@index')->name('user_home');
+Route::post('/user', 'UserController@update');
 
 Route::get('/', ['as'=>'main_page', 'uses'=>'IndexController']);
 Route::get('/categories/{url}', 'CategoryController@productsList')->name('category_page');

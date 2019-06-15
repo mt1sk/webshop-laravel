@@ -79,11 +79,23 @@
                             </ul>
                             <!-- Dropdown End -->
                         </li>
-                        <li><a href="#">My Account<i class="lnr lnr-chevron-down"></i></a>
+                        <li><a href="javascript:;">My Account<i class="lnr lnr-chevron-down"></i></a>
                             <!-- Dropdown Start -->
                             <ul class="ht-dropdown">
-                                <li><a href="login.html">Login</a></li>
-                                <li><a href="register.html">Register</a></li>
+                                @if(!Auth::user())
+                                    <li><a href="{{route('login')}}">Login</a></li>
+                                    <li><a href="{{route('register')}}">Register</a></li>
+                                @else
+                                    <li><a href="{{route('user_home')}}">Your data</a></li>
+                                    <li>
+                                        <a href="{{route('logout')}}"
+                                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                @endif
                             </ul>
                             <!-- Dropdown End -->
                         </li>
