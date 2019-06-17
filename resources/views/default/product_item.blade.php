@@ -2,7 +2,7 @@
 @isset($params['is_catalog'])
 <div class="col-lg-4 col-md-4 col-sm-6 col-6">
 @endisset
-    <div class="single-product">
+    <div class="single-product fn_product_block">
         <!-- Product Image Start -->
         <div class="pro-img">
             <a href="{{route('product_page', ['url'=>$p->url])}}">
@@ -38,7 +38,7 @@
             </div>
             <div class="pro-actions">
                 <div class="actions-primary">
-                    <a href="javascript:;" title="Add to Cart"> + Add To Cart</a>
+                    <a href="javascript:;" class="fn_add_cart" data-product_id="{{$p->id}}" title="Add to Cart"> + Add To Cart</a>
                 </div>
                 <div class="actions-secondary">
                     <a href="javascript:;" title="Compare"><i class="lnr lnr-sync"></i> <span>Add To Compare</span></a>

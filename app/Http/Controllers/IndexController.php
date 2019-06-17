@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Brand;
+use App\Cart;
 use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
@@ -15,6 +16,13 @@ class IndexController extends Controller
     {
         $categories = Category::where('enabled', 1)->get();
         View::share('categories', $categories);
+
+        $this->middleware(function ($request, $next) {
+            $cart = Cart::currentObject();
+            View::share('cart', $cart);
+            return $next($request);
+        });
+
         View::share('meta_title', 'default');
         View::share('meta_keywords', 'default');
         View::share('meta_description', 'default');
@@ -37,9 +45,12 @@ class IndexController extends Controller
             ->where('best_seller', 1)
             ->get();
         foreach ($tm as $p) {
-            $bestseller_products[$p->brand->name][] = $p;
+            if (!empty($p->brand)) {
+                $bestseller_products[$p->brand->name][] = $p;
+            }
         }
         $view->with('bestseller_products', $bestseller_products);
+
         $brands = Brand::where('enabled', 1)->get();
         $view->with('brands', $brands);
         return $view;

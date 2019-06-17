@@ -22,7 +22,7 @@
     <div class="main-product-thumbnail pt-30 pb-100 ptb-sm-60">
         <div class="container">
             <div class="thumb-bg">
-                <div class="row">
+                <div class="row fn_product_block">
                     <!-- Main Thumbnail Image Start -->
                     <div class="col-lg-5 mb-all-40">
                         <!-- Thumbnail Large Image start -->
@@ -125,11 +125,11 @@
                             </div>
                             <div class="box-quantity d-flex hot-product2">
                                 <form action="#">
-                                    <input class="quantity mr-15" type="number" min="1" value="1">
+                                    <input class="quantity mr-15 fn_product_amount" type="number" min="1" value="1">
                                 </form>
                                 <div class="pro-actions">
                                     <div class="actions-primary">
-                                        <a href="javascript:;" title="" data-original-title="Add to Cart"> + Add To Cart</a>
+                                        <a href="javascript:;" class="fn_add_cart" data-product_id="{{$product->id}}" title="" data-original-title="Add to Cart"> + Add To Cart</a>
                                     </div>
                                     <div class="actions-secondary">
                                         <a href="javascript:;" title="" data-original-title="Compare"><i class="lnr lnr-sync"></i> <span>Add To Compare</span></a>
