@@ -27,9 +27,9 @@ class Cart extends Model
                 $cookie_cart->save();
             }
             $cart = $cookie_cart;
-        } elseif (!empty($cookie_cart)) {
+        } elseif (!empty($cookie_cart) && empty($cookie_cart->user_id)) {
             /*
-             * если есть пользовательская корзина и при этом до авторизиции он заполнял новую
+             * если есть пользовательская корзина и при этом до авторизиции он заполнял новую(без пользователя)
              * то новая будет приорететна и перезапишит старую
              */
             if ($user->cart->id != $cookie_cart->id) {

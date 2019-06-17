@@ -7,6 +7,7 @@ use App\Cart;
 use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\View;
 
 class IndexController extends Controller
@@ -19,7 +20,10 @@ class IndexController extends Controller
 
         $this->middleware(function ($request, $next) {
             Cart::calculateCartAttributes();
-            View::share('cart', Cart::currentObject());
+            $cart = Cart::currentObject();
+            View::share('cart', $cart);
+
+            Cookie::queue('cart_id', $cart->id, 60*24*365);
             return $next($request);
         });
 

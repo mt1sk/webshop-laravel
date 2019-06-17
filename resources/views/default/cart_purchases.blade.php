@@ -15,11 +15,13 @@
                 <tr class="cart_item">
                     <td class="col-lg-1">
                         @if(!empty($p->image))
-                            <img src="{{$p->imageView()}}" height="50">
+                            <a href="{{route('product_page', ['url'=>$p->url])}}">
+                                <img src="{{$p->imageView()}}" height="50" />
+                            </a>
                         @endif
                     </td>
                     <td class="col-lg-4 product-name">
-                        {{$p->name}}
+                        <a href="{{route('product_page', ['url'=>$p->url])}}">{{$p->name}}</a>
                     </td>
                     <td class="col-lg-2">${{$p->price}}</td>
                     <td class="col-lg-2">
