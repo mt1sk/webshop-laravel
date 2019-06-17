@@ -59,7 +59,7 @@
                     <ul>
                         <li><a href="#">Free Shipping on order over $99</a></li>
                         <li><a href="#">Shopping Cart</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
+                        <li><a href="{{route('cart_page')}}">Checkout</a></li>
                     </ul>
                     <ul>
                         <li><span>Language</span> <a href="#">English<i class="lnr lnr-chevron-down"></i></a>
@@ -171,8 +171,7 @@
                                     <ul class="ht-dropdown dropdown-style-two">
                                         <li><a href="{{route('brands_list')}}">Brands</a></li>
                                         <li><a href="javascript:;">compare</a></li>
-                                        <li><a href="javascript:;">cart</a></li>
-                                        <li><a href="javascript:;">checkout</a></li>
+                                        <li><a href="{{route('cart_page')}}">checkout</a></li>
                                         <li><a href="javascript:;">wishlist</a></li>
                                     </ul>
                                     <!-- Home Version Dropdown End -->
@@ -205,8 +204,7 @@
                                         <ul>
                                             <li><a href="{{route('brands_list')}}">Brands</a></li>
                                             <li><a href="javascript:;">compare</a></li>
-                                            <li><a href="javascript:;">cart</a></li>
-                                            <li><a href="javascript:;">checkout</a></li>
+                                            <li><a href="{{route('cart_page')}}">checkout</a></li>
                                             <li><a href="javascript:;">wishlist</a></li>
                                         </ul>
                                         <!-- Mobile Menu Dropdown End -->
@@ -660,7 +658,7 @@
 
 <script>
     $(function() {
-        $(document).on('click', '.fn_add_cart', function() {
+        $(document).on('click', '.fn_cart_add', function() {
             var product_block = $(this).closest('.fn_product_block'),
                 amount = Math.max(1, product_block.find('.fn_product_amount').val());
             if (isNaN(amount)) {
@@ -675,41 +673,85 @@
                     'amount': amount,
                     '_token': "{{csrf_token()}}",
                 },
-                success: function ($result) {
-                    if ($result.success) {
-                        $('.fn_cart_informer').replaceWith($result.cart_informer);
+                success: function (result) {
+                    if (result.success) {
+                        $('.fn_cart_informer').replaceWith(result.cart_informer);
                     }
                 },
-                error: function ($result) {
-                    if ($result.status == 419) {
+                error: function (result) {
+                    if (result.status == 419) {
                         alert('Please reload this page before shopping...');
                     } else {
-                        alert($result.responseJSON.message ? $result.responseJSON.message : 'error');
+                        alert(result.responseJSON.message ? result.responseJSON.message : 'error');
                     }
                 },
             });
             return false;
         });
 
-        $(document).on('click', '.fn_delete_cart', function() {
+        $(document).on('click', '.fn_cart_delete', function() {
+            var is_cart_page = '{{Route::currentRouteName() == 'cart_page'}}';
             $.ajax({
                 url: "{{ route('cart_ajax') }}",
                 method: 'post',
                 data: {
                     'action': 'delete',
                     'product_id': $(this).data('product_id'),
+                    'is_cart_page': is_cart_page,
                     '_token': "{{csrf_token()}}",
                 },
-                success: function ($result) {
-                    if ($result.success) {
-                        $('.fn_cart_informer').replaceWith($result.cart_informer);
+                success: function (result) {
+                    if (result.success) {
+                        $('.fn_cart_informer').replaceWith(result.cart_informer);
+                        if (is_cart_page) {
+                            if (!result.is_cart_empty) {
+                                $('.fn_cart_purchases').replaceWith(result.cart_purchases);
+                            } else {
+                                $('.fn_content').html('<div class="checkout-area pb-30 pl-10 pt-30 pb-sm-60">\n' +
+                                    '            <div class="container">\n' +
+                                    '                <div class="row">\n' +
+                                    '                    <div class="col-lg-12 col-md-12 pb-20">Empty cart</div></div></div></div>');
+                            }
+                        }
                     }
                 },
-                error: function ($result) {
-                    if ($result.status == 419) {
+                error: function (result) {
+                    if (result.status == 419) {
                         alert('Please reload this page before shopping...');
                     } else {
-                        alert($result.responseJSON.message ? $result.responseJSON.message : 'error');
+                        alert(result.responseJSON.message ? result.responseJSON.message : 'error');
+                    }
+                },
+            });
+            return false;
+        });
+
+        $(document).on('change', '.fn_purchase_amount', function() {
+            var is_cart_page = '{{Route::currentRouteName() == 'cart_page'}}',
+                amount = Math.max(1, $(this).val());
+            $.ajax({
+                url: "{{ route('cart_ajax') }}",
+                method: 'post',
+                data: {
+                    'action': 'update',
+                    'product_id': $(this).data('product_id'),
+                    'amount': amount,
+                    'is_cart_page': is_cart_page,
+                    '_token': "{{csrf_token()}}",
+                },
+                success: function (result) {
+                    if (result.success) {
+                        $('.fn_cart_informer').replaceWith(result.cart_informer);
+                        if (is_cart_page) {
+                            $('.fn_cart_purchases').replaceWith(result.cart_purchases);
+                        }
+                    }
+                },
+                error: function (result) {
+                    if (result.status == 419) {
+                        alert('Please reload this page before shopping...');
+                    } else {
+                        alert(result.responseJSON.message ? result.responseJSON.message : 'error');
                     }
                 },
             });

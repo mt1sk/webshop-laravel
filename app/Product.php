@@ -36,6 +36,11 @@ class Product extends Model
         return is_null($this->old_price) ? 0 : round(100 - $this->price / $this->old_price * 100, 2);
     }
 
+    public function getCartTotalPriceAttribute()
+    {
+        return number_format($this->price * (!isset($this->pivot->amount) ? 1 : $this->pivot->amount), 2);
+    }
+
     protected function originalDir()
     {
         return self::$originalDir;

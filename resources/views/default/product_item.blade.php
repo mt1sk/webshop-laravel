@@ -38,7 +38,7 @@
             </div>
             <div class="pro-actions">
                 <div class="actions-primary">
-                    <a href="javascript:;" class="fn_add_cart" data-product_id="{{$p->id}}" title="Add to Cart"> + Add To Cart</a>
+                    <a href="javascript:;" class="fn_cart_add" data-product_id="{{$p->id}}" title="Add to Cart"> + Add To Cart</a>
                 </div>
                 <div class="actions-secondary">
                     <a href="javascript:;" title="Compare"><i class="lnr lnr-sync"></i> <span>Add To Compare</span></a>

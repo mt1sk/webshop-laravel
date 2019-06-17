@@ -18,8 +18,8 @@ class IndexController extends Controller
         View::share('categories', $categories);
 
         $this->middleware(function ($request, $next) {
-            $cart = Cart::currentObject();
-            View::share('cart', $cart);
+            Cart::calculateCartAttributes();
+            View::share('cart', Cart::currentObject());
             return $next($request);
         });
 

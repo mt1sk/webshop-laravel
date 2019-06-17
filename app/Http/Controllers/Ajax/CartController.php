@@ -35,8 +35,18 @@ class CartController extends Controller
                 }
             }
 
-            $view = view('default.cart_informer', ['cart'=>Cart::currentObject()]);
+            Cart::calculateCartAttributes();
+            $cart = Cart::currentObject();
+            $view = view('default.cart_informer', ['cart'=>$cart]);
             $json = ['success'=>1, 'cart_informer'=>$view->render()];
+
+            if ($request->get('is_cart_page', 0)) {
+                if ($cart->productsCount > 0) {
+                    $json['cart_purchases'] = view('default.cart_purchases', ['cart' => $cart])->render();
+                } else {
+                    $json['is_cart_empty'] = 1;
+                }
+            }
         } else {
             $json = ['success'=>0, 'message'=>'Product not found'];
         }

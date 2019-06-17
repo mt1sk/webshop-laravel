@@ -54,6 +54,21 @@ class Cart extends Model
         return $cart;
     }
 
+    public static function calculateCartAttributes()
+    {
+        $cart = self::currentObject();
+        $cart->productsCount = 0;
+        $cart->subtotalCost = 0;
+        $cart->totalCost = 0;
+        foreach ($cart->products as $product) {
+            $cart->productsCount += $product->pivot->amount;
+            $cart->subtotalCost += $product->price * $product->pivot->amount;
+        }
+
+        $cart->totalCost = number_format($cart->subtotalCost, 2);
+        $cart->subtotalCost = $cart->totalCost;
+    }
+
     public function products()
     {
         return $this->belongsToMany(Product::class)->withPivot(['amount']);

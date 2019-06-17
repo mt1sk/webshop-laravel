@@ -50,3 +50,4 @@ Route::get('/brands/{url}', 'BrandController@productsList')->name('brand_page');
 Route::get('/product/{url}', 'ProductController@productItem')->name('product_page');
 
 Route::post('/cart_ajax', 'Ajax\CartController')->name('cart_ajax');
+Route::get('/cart', 'CartController')->name('cart_page');

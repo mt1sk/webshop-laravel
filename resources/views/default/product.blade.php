@@ -129,7 +129,7 @@
                                 </form>
                                 <div class="pro-actions">
                                     <div class="actions-primary">
-                                        <a href="javascript:;" class="fn_add_cart" data-product_id="{{$product->id}}" title="" data-original-title="Add to Cart"> + Add To Cart</a>
+                                        <a href="javascript:;" class="fn_cart_add" data-product_id="{{$product->id}}" title="" data-original-title="Add to Cart"> + Add To Cart</a>
                                     </div>
                                     <div class="actions-secondary">
                                         <a href="javascript:;" title="" data-original-title="Compare"><i class="lnr lnr-sync"></i> <span>Add To Compare</span></a>
