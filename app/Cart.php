@@ -69,6 +69,12 @@ class Cart extends Model
         $cart->subtotalCost = $cart->totalCost;
     }
 
+    public static function emptyItems()
+    {
+        $cart = self::currentObject();
+        $cart->products()->detach($cart->products()->allRelatedIds());
+    }
+
     public function products()
     {
         return $this->belongsToMany(Product::class)->withPivot(['amount']);

@@ -658,6 +658,10 @@
 
 <script>
     $(function() {
+        @isset($go_to_anchor)
+            document.getElementById('{{$go_to_anchor}}').scrollIntoView();
+        @endif
+
         $(document).on('click', '.fn_cart_add', function() {
             var product_block = $(this).closest('.fn_product_block'),
                 amount = Math.max(1, product_block.find('.fn_product_amount').val());

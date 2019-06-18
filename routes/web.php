@@ -51,3 +51,5 @@ Route::get('/product/{url}', 'ProductController@productItem')->name('product_pag
 
 Route::post('/cart_ajax', 'Ajax\CartController')->name('cart_ajax');
 Route::get('/cart', 'CartController')->name('cart_page');
+Route::post('/cart', 'CartController@checkout');
+Route::get('/order/{url}', 'OrderController@show')->name('order_page');
