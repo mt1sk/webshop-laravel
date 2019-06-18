@@ -70,11 +70,14 @@ class CartController extends Controller
             $cart->products()->attach($product_id, ['amount'=>$amount]);
         }
         $cart->touch();
+        unset($cart->products);
     }
 
     private function deleteItem($product_id)
     {
-        Cart::currentObject()->products()->detach($product_id);
-        Cart::currentObject()->touch();
+        $cart = Cart::currentObject();
+        $cart->products()->detach($product_id);
+        $cart->touch();
+        unset($cart->products);
     }
 }

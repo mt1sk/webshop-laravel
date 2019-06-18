@@ -67,7 +67,7 @@
                                             <td class=""></td>
                                             <td class=""></td>
                                             <td class=""></td>
-                                            <th>Cart total</th>
+                                            <th>Total</th>
                                             <td><span class="amount">${{$order->subtotalPrice}}</span></td>
                                         </tr>
                                         <tr class="order-total">

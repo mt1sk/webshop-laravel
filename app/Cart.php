@@ -10,6 +10,12 @@ class Cart extends Model
 {
     private static $instance;
 
+    private $productsCount;
+
+    private $subtotalCost;
+
+    private $totalCost;
+
     public static function currentObject()
     {
         if (isset(self::$instance)) {
@@ -73,6 +79,22 @@ class Cart extends Model
     {
         $cart = self::currentObject();
         $cart->products()->detach($cart->products()->allRelatedIds());
+        $cart->touch();
+    }
+
+    public function getProductsCountAttribute()
+    {
+        return $this->productsCount;
+    }
+
+    public function getSubtotalCostAttribute()
+    {
+        return $this->subtotalCost;
+    }
+
+    public function getTotalCostAttribute()
+    {
+        return $this->totalCost;
     }
 
     public function products()
