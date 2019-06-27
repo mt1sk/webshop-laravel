@@ -163,9 +163,9 @@ License: You must have a valid license purchased only from templatemonster to le
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
-                    <a class="dropdown-item" href="profile.html"><i class="dropdown-icon zmdi zmdi-account"></i><span>Profile</span></a>
+                    <a class="dropdown-item" href="javascript:;"><i class="dropdown-icon zmdi zmdi-account"></i><span>Profile</span></a>
                     <a class="dropdown-item" href="#"><i class="dropdown-icon zmdi zmdi-card"></i><span>My balance</span></a>
-                    <a class="dropdown-item" href="inbox.html"><i class="dropdown-icon zmdi zmdi-email"></i><span>Inbox</span></a>
+                    <a class="dropdown-item" href="javascript:;"><i class="dropdown-icon zmdi zmdi-email"></i><span>Inbox</span></a>
                     <a class="dropdown-item" href="#"><i class="dropdown-icon zmdi zmdi-settings"></i><span>Settings</span></a>
                     <div class="dropdown-divider"></div>
                     <div class="sub-dropdown-menu show-on-hover">
@@ -239,6 +239,11 @@ License: You must have a valid license purchased only from templatemonster to le
                                     <li class="nav-item">
                                         <a class="nav-link" href="javascript:;">Orders settings</a>
                                     </li>
+                                    @can('list', \App\Coupon::class )
+                                        <li class="nav-item @if($menu_item=='coupons') active @endif">
+                                            <a class="nav-link" href="{{route('coupons.list')}}">Coupons</a>
+                                        </li>
+                                    @endcan
                                 </ul>
                             </li>
                         </ul>

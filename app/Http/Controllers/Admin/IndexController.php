@@ -15,6 +15,8 @@ class IndexController extends Controller
             'categories'    => 'catalog',
             'brands'        => 'catalog',
 
+            'coupons'       => 'orders',
+
             'managers'      => 'settings',
         ];
         preg_match('~^([A-z0-9]+)\..+$~', Route::currentRouteName(), $match);

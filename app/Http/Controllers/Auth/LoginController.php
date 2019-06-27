@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\IndexController;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends IndexController
 {
@@ -41,5 +42,10 @@ class LoginController extends IndexController
     public function showLoginForm()
     {
         return view('default.auth.login');
+    }
+
+    protected function loggedOut(Request $request)
+    {
+        return redirect(url()->previous());
     }
 }

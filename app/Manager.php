@@ -21,6 +21,9 @@ class Manager extends Authenticatable
 
         'manager_list'=>'Managers list', 'manager_view'=>'Manager view', 'manager_create'=>'Manager create',
         'manager_update'=>'Manager edit', 'manager_delete'=>'Manager delete',
+
+        'coupon_list'=>'Coupons list', 'coupon_view'=>'Coupon view', 'coupon_create'=>'Coupon create',
+        'coupon_update'=>'Coupon edit', 'coupon_delete'=>'Coupon delete',
     ];
 
     protected static $permissions_list;

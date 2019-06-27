@@ -34,17 +34,23 @@ class Cart extends Model
             }
             $cart = $cookie_cart;
         } elseif (!empty($cookie_cart) && empty($cookie_cart->user_id)) {
-            /*
-             * если есть пользовательская корзина и при этом до авторизиции он заполнял новую(без пользователя)
-             * то новая будет приорететна и перезапишит старую
-             */
-            if ($user->cart->id != $cookie_cart->id) {
-                self::destroy($user->cart->id);
-                $cookie_cart->user_id = $user->id;
-                $cookie_cart->save();
-            }
+            if ($cookie_cart->products->isEmpty()) {
+                /* если корзина с кук пуста то не нужно удалять пользовательскую */
+                self::destroy($cookie_cart->id);
+                $cart = $user->cart;
+            } else {
+                /*
+                 * если есть пользовательская корзина и при этом до авторизиции он заполнял новую(без пользователя)
+                 * то новая будет приорететна и перезапишит старую
+                 */
+                if ($user->cart->id != $cookie_cart->id) {
+                    self::destroy($user->cart->id);
+                    $cookie_cart->user_id = $user->id;
+                    $cookie_cart->save();
+                }
 
-            $cart = $cookie_cart;
+                $cart = $cookie_cart;
+            }
         } else {
             $cart = $user->cart;
         }

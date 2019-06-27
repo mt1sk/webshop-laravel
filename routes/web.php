@@ -37,6 +37,9 @@ Route::group(['prefix'=>'administrator', 'middleware'=>['auth:administrator']], 
 
     Route::get('managers/list', ['as'=>'managers.list', 'uses'=>'Admin\ManagerController']);
     Route::resource('managers', 'Admin\ManagerController', ['except'=>['index', 'show']]);
+
+    Route::get('coupons/list', ['as'=>'coupons.list', 'uses'=>'Admin\CouponController']);
+    Route::resource('coupons', 'Admin\CouponController', ['except'=>['index', 'show']]);
 });
 
 Auth::routes(['verify' => true]);
