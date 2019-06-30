@@ -37,6 +37,14 @@ class CartController extends IndexController
             $order->url = uniqid();
             $order->user_id = Auth::id();
             $order->total_price = $cart->totalCost;
+            if (!empty($cart->coupon)) {
+                $order->coupon_discount = $cart->couponDiscount;
+                $order->coupon_id = $cart->coupon->id;
+                $order->coupon_code = $cart->coupon->code;
+
+                $cart->coupon->usages++;
+                $cart->coupon->save();
+            }
             $order->save();
 
             foreach ($cart->products as $p) {
@@ -82,6 +90,10 @@ class CartController extends IndexController
                 $data['name'] = $user->name;
                 $data['email'] = $user->email;
             }
+        }
+        $coupon = Cart::currentObject()->coupon;
+        if (!empty($coupon)) {
+            $data['coupon_code'] = $coupon->code;
         }
 
         return $view->with($data);

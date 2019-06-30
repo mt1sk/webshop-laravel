@@ -70,6 +70,15 @@
                                             <th>Total</th>
                                             <td><span class="amount">${{$order->subtotalPrice}}</span></td>
                                         </tr>
+                                        @if($order->coupon_discount > 0)
+                                            <tr class="cart-subtotal">
+                                                <td class=""></td>
+                                                <td class=""></td>
+                                                <td class=""></td>
+                                                <th>Coupon discount</th>
+                                                <td><span class="amount">-${{$order->coupon_discount}}</span></td>
+                                            </tr>
+                                        @endif
                                         <tr class="order-total">
                                             <td class=""></td>
                                             <td class=""></td>

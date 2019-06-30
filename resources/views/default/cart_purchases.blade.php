@@ -44,6 +44,15 @@
                 <th>Cart total</th>
                 <td><span class="amount">${{$cart->subtotalCost}}</span></td>
             </tr>
+            @isset($cart->coupon)
+                <tr class="cart-subtotal">
+                    <td class=""></td>
+                    <td class=""></td>
+                    <td class=""></td>
+                    <th>Coupon discount</th>
+                    <td><span class="amount">-${{$cart->couponDiscount}}</span></td>
+                </tr>
+            @endisset
             <tr class="order-total">
                 <td class=""></td>
                 <td class=""></td>

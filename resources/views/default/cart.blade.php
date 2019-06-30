@@ -18,13 +18,13 @@
     <div class="fn_content">
         @if($cart->productsCount > 0)
             <!-- coupon-area start -->
-            {{--<div class="coupon-area pt-30 pt-sm-60">
+            <div class="coupon-area pt-30 pt-sm-60">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="coupon-accordion">
                                 <!-- ACCORDION START -->
-                                <h3>Returning customer? <span id="showlogin">Click here to login</span></h3>
+                                {{--<h3>Returning customer? <span id="showlogin">Click here to login</span></h3>
                                 <div id="checkout-login" class="coupon-content">
                                     <div class="coupon-info">
                                         <p class="coupon-text">Quisque gravida turpis sit amet nulla posuere lacinia. Cras sed est sit amet ipsum luctus.</p>
@@ -49,26 +49,16 @@
                                             </p>
                                         </form>
                                     </div>
-                                </div>
+                                </div>--}}
                                 <!-- ACCORDION END -->
-                                <!-- ACCORDION START -->
-                                <h3>Have a coupon? <span id="showcoupon">Click here to enter your code</span></h3>
-                                <div id="checkout_coupon" class="coupon-checkout-content">
-                                    <div class="coupon-info">
-                                        <form action="#">
-                                            <p class="checkout-coupon">
-                                                <input type="text" class="code" placeholder="Coupon code" />
-                                                <input type="submit" value="Apply Coupon" />
-                                            </p>
-                                        </form>
-                                    </div>
-                                </div>
-                                <!-- ACCORDION END -->
+
+                                <h3>Have a coupon? Enter your code</h3>
+                                @include('default.cart_coupon')
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>--}}
+            </div>
             <!-- coupon-area end -->
 
             <!-- checkout-area start -->

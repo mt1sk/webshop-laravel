@@ -657,6 +657,13 @@
 <script src="/js/main.js"></script>
 
 <script>
+    var error_ajax_cart_function = function (result) {
+        if (result.status == 419) {
+            alert('Please reload this page before shopping...');
+        } else {
+            alert(result.responseJSON.message ? result.responseJSON.message : 'error');
+        }
+    };
     $(function() {
         @isset($go_to_anchor)
             document.getElementById('{{$go_to_anchor}}').scrollIntoView();
@@ -682,13 +689,7 @@
                         $('.fn_cart_informer').replaceWith(result.cart_informer);
                     }
                 },
-                error: function (result) {
-                    if (result.status == 419) {
-                        alert('Please reload this page before shopping...');
-                    } else {
-                        alert(result.responseJSON.message ? result.responseJSON.message : 'error');
-                    }
-                },
+                error: error_ajax_cart_function,
             });
             return false;
         });
@@ -719,13 +720,7 @@
                         }
                     }
                 },
-                error: function (result) {
-                    if (result.status == 419) {
-                        alert('Please reload this page before shopping...');
-                    } else {
-                        alert(result.responseJSON.message ? result.responseJSON.message : 'error');
-                    }
-                },
+                error: error_ajax_cart_function,
             });
             return false;
         });
@@ -751,13 +746,31 @@
                         }
                     }
                 },
-                error: function (result) {
-                    if (result.status == 419) {
-                        alert('Please reload this page before shopping...');
-                    } else {
-                        alert(result.responseJSON.message ? result.responseJSON.message : 'error');
+                error: error_ajax_cart_function,
+            });
+            return false;
+        });
+
+        $(document).on('click', '.fn_coupon_apply', function () {
+            var is_cart_page = 1;
+            $('.fn_coupon_errors').remove();
+            $.ajax({
+                url: "{{ route('cart_ajax') }}",
+                method: 'post',
+                data: {
+                    'action': 'coupon_apply',
+                    'coupon_code': $('.fn_coupon_code').val(),
+                    'is_cart_page': is_cart_page,
+                    '_token': "{{csrf_token()}}",
+                },
+                success: function (result) {
+                    $('.fn_cart_informer').replaceWith(result.cart_informer);
+                    if (is_cart_page) {
+                        $('.fn_cart_purchases').replaceWith(result.cart_purchases);
+                        $('.fn_cart_coupon').replaceWith(result.cart_coupon);
                     }
                 },
+                error: error_ajax_cart_function,
             });
             return false;
         });

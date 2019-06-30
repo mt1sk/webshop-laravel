@@ -35,6 +35,9 @@
                 <div class="cart-footer">
                     <ul class="price-content">
                         <li>Subtotal <span>${{$cart->subtotalCost}}</span></li>
+                        @isset($cart->coupon)
+                            <li>Coupon discount <span>-${{$cart->couponDiscount}}</span></li>
+                        @endisset
                         <li>Total <span>${{$cart->totalCost}}</span></li>
                     </ul>
                     <div class="cart-actions text-center">

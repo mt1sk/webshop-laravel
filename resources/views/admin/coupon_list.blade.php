@@ -43,7 +43,7 @@
                                         <tbody>
                                         @foreach($coupons as $coupon)
                                             <tr>
-                                                <td class="col-lg-8">{{$coupon->code}}</td>
+                                                <td class="col-lg-8">{{$coupon->code}} - {{$coupon->value}} @if($coupon->type=='absolute') $ @else % @endif</td>
                                                 <td class="col-lg-1">
                                                     {{--<div class="custom-control custom-checkbox checkbox-primary">
                                                         <input type="checkbox" class="custom-control-input" id="list_item_{{$coupon->id}}" @if($coupon->enabled) checked @endif >
