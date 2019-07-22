@@ -45,11 +45,9 @@ class Cart extends Model
                  * если есть пользовательская корзина и при этом до авторизиции он заполнял новую(без пользователя)
                  * то новая будет приорететна и перезапишит старую
                  */
-                if ($user->cart->id != $cookie_cart->id) {
-                    self::destroy($user->cart->id);
-                    $cookie_cart->user_id = $user->id;
-                    $cookie_cart->save();
-                }
+                self::destroy($user->cart->id);
+                $cookie_cart->user_id = $user->id;
+                $cookie_cart->save();
 
                 $cart = $cookie_cart;
             }
@@ -139,5 +137,10 @@ class Cart extends Model
     public function coupon()
     {
         return $this->belongsTo(Coupon::class);
+    }
+
+    /* for testing .. ((*/
+    public static function unsetInstance() {
+        self::$instance = null;
     }
 }
