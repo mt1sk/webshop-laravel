@@ -6,6 +6,7 @@ use App\Brand;
 use App\Cart;
 use App\Category;
 use App\Product;
+use App\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\View;
@@ -22,8 +23,11 @@ class IndexController extends Controller
             Cart::calculateCartAttributes();
             $cart = Cart::currentObject();
             View::share('cart', $cart);
-
             Cookie::queue('cart_id', $cart->id, 60*24*365);
+
+            $wishlist = Wishlist::currentObject();
+            View::share('wishlist', $wishlist);
+            Cookie::queue('wishlist_id', $wishlist->id, 60*24*365);
             return $next($request);
         });
 

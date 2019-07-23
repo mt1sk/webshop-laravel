@@ -133,7 +133,10 @@
                                     </div>
                                     <div class="actions-secondary">
                                         <a href="javascript:;" title="" data-original-title="Compare"><i class="lnr lnr-sync"></i> <span>Add To Compare</span></a>
-                                        <a href="javascript:;" title="" data-original-title="WishList"><i class="lnr lnr-heart"></i> <span>Add to WishList</span></a>
+                                        <a href="javascript:;" class="fn_wishlist @if($wishlist->products->contains($product->id)) fn_selected @endif" data-product_id="{{$product->id}}" data-toggle_text="@if($wishlist->products->contains($product->id)) Add to WishList @else Remove from WishList @endif" title="" data-original-title="WishList">
+                                            <i class="lnr lnr-heart"></i>
+                                            <span>@if($wishlist->products->contains($product->id)) Remove from WishList @else Add to WishList @endif</span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

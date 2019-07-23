@@ -2,6 +2,9 @@
 @isset($params['is_catalog'])
 <div class="col-lg-4 col-md-4 col-sm-6 col-6">
 @endisset
+@isset($params['is_wishlist'])
+<div class="col-lg-3 col-md-3 col-sm-6 col-6">
+@endisset
     <div class="single-product fn_product_block">
         <!-- Product Image Start -->
         <div class="pro-img">
@@ -42,7 +45,10 @@
                 </div>
                 <div class="actions-secondary">
                     <a href="javascript:;" title="Compare"><i class="lnr lnr-sync"></i> <span>Add To Compare</span></a>
-                    <a href="javascript:;" title="WishList"><i class="lnr lnr-heart"></i> <span>Add to WishList</span></a>
+                    <a href="javascript:;" class="fn_wishlist @if($wishlist->products->contains($p->id)) fn_selected @endif" data-product_id="{{$p->id}}" data-toggle_text="@if($wishlist->products->contains($p->id)) Add to WishList @else Remove from WishList @endif" title="WishList">
+                        <i class="lnr lnr-heart"></i>
+                        <span>@if($wishlist->products->contains($p->id)) Remove from WishList @else Add to WishList @endif</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -54,7 +60,7 @@
             <span class="sticker-sale">sale</span>
         @endif
     </div>
-@isset($params['is_catalog'])
+@if(isset($params['is_catalog']) || isset($params['is_wishlist']))
 </div>
-@endisset
+@endif
 <!-- Single Product End -->

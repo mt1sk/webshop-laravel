@@ -139,12 +139,15 @@
                         <div class="cart-box mt-all-30">
                             <ul class="d-flex justify-content-lg-end justify-content-center align-items-center">
                                 @include('default.cart_informer')
-                                <li><a href="#"><i class="lnr lnr-heart"></i><span class="my-cart"><span>Wish</span><span>list (0)</span></span></a>
-                                </li>
-                                <li><a href="{{route('user_home')}}"><i class="lnr lnr-user"></i><span class="my-cart"><span> <strong>Sign in</strong> Or</span><span> Join My Site</span></span></a>
-
-
-
+                                @include('default.wishlist_informer')
+                                <li>
+                                    <a href="{{route('user_home')}}">
+                                        <i class="lnr lnr-user"></i>
+                                        <span class="my-cart">
+                                            <span> <strong>Sign in</strong> Or</span>
+                                            <span> Join My Site</span>
+                                        </span>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -172,7 +175,7 @@
                                         <li><a href="{{route('brands_list')}}">Brands</a></li>
                                         <li><a href="javascript:;">compare</a></li>
                                         <li><a href="{{route('cart_page')}}">checkout</a></li>
-                                        <li><a href="javascript:;">wishlist</a></li>
+                                        <li><a href="{{route('wishlist_page')}}">wishlist</a></li>
                                     </ul>
                                     <!-- Home Version Dropdown End -->
                                 </li>
@@ -205,7 +208,7 @@
                                             <li><a href="{{route('brands_list')}}">Brands</a></li>
                                             <li><a href="javascript:;">compare</a></li>
                                             <li><a href="{{route('cart_page')}}">checkout</a></li>
-                                            <li><a href="javascript:;">wishlist</a></li>
+                                            <li><a href="{{route('wishlist_page')}}">wishlist</a></li>
                                         </ul>
                                         <!-- Mobile Menu Dropdown End -->
                                     </li>
@@ -421,7 +424,7 @@
                                     <li><a href="contact.html">Contact Us</a></li>
                                     <li><a href="#">Returns</a></li>
                                     <li><a href="#">Order History</a></li>
-                                    <li><a href="wishlist.html">Wish List</a></li>
+                                    <li><a href="{{route('wishlist_page')}}">Wish List</a></li>
                                     <li><a href="#">Site Map</a></li>
                                     <li><a href="#">Gift Certificates</a></li>
                                 </ul>
@@ -456,7 +459,7 @@
                                     <li><a href="#">Returns</a></li>
                                     <li><a href="#">My Account</a></li>
                                     <li><a href="#">Order History</a></li>
-                                    <li><a href="wishlist.html">Wish List</a></li>
+                                    <li><a href="{{route('wishlist_page')}}">Wish List</a></li>
                                     <li><a href="#">Newsletter</a></li>
                                 </ul>
                             </div>
@@ -768,6 +771,47 @@
                     if (is_cart_page) {
                         $('.fn_cart_purchases').replaceWith(result.cart_purchases);
                         $('.fn_cart_coupon').replaceWith(result.cart_coupon);
+                    }
+                },
+                error: error_ajax_cart_function,
+            });
+            return false;
+        });
+
+        $(document).on('click', '.fn_wishlist', function() {
+            var product_block = $(this).closest('.fn_product_block'),
+                elem = $(this),
+                action = $(this).hasClass('fn_selected') ? 'delete' : 'add',
+                is_wishlist_page = '{{Route::currentRouteName() == 'wishlist_page'}}';
+            $.ajax({
+                url: "{{ route('wishlist_ajax') }}",
+                method: 'post',
+                data: {
+                    'action': action,
+                    'product_id': $(this).data('product_id'),
+                    'is_wishlist_page': is_wishlist_page,
+                    '_token': "{{csrf_token()}}",
+                },
+                success: function (result) {
+                    if (result.success) {
+                        $('.fn_wishlist_informer').replaceWith(result.wishlist_informer);
+                        if (is_wishlist_page) {
+                            if (!result.is_wishlist_empty) {
+                                $('.fn_wishlist_items').replaceWith(result.wishlist_items);
+                            } else {
+                                $('.fn_content').html('<div class="main-shop-page pt-20 pb-100 ptb-sm-60">\n' +
+                                    '            <div class="container">\n' +
+                                    '                <div class="row">\n' +
+                                    '                    <div class="col-lg-12 order-1 order-lg-2">WishList is empty.</div></div></div></div>');
+                            }
+                        } else {
+                            elem.toggleClass('fn_selected');
+
+                            var text = elem.data('toggle_text'),
+                                title = elem.find('span').text();
+                            elem.data('toggle_text', title);
+                            elem.find('span').text(text);
+                        }
                     }
                 },
                 error: error_ajax_cart_function,

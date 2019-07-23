@@ -56,3 +56,6 @@ Route::post('/cart_ajax', 'Ajax\CartController')->name('cart_ajax');
 Route::get('/cart', 'CartController')->name('cart_page');
 Route::post('/cart', 'CartController@checkout');
 Route::get('/order/{url}', 'OrderController@show')->name('order_page');
+
+Route::post('/wishlist_ajax', 'Ajax\WishlistController')->name('wishlist_ajax');
+Route::get('/wishlist', 'WishlistController')->name('wishlist_page');
