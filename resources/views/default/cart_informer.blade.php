@@ -13,15 +13,11 @@
                     <!-- Cart Box Start -->
                     <div class="single-cart-box">
                         <div class="cart-img">
-                            @if(!empty($p->image))
-                                <a href="{{route('product_page', ['url'=>$p->url])}}"><img src="{{$p->imageView()}}" alt="cart-image"></a>
-                            @else
-                                <a href="{{route('product_page', ['url'=>$p->url])}}"><img src="/img/products/1.jpg" alt="cart-image"></a>
-                            @endif
+                            <a href="{{route('product_page', ['url'=>$p->url])}}"><img src="{{$p->showImage()}}" alt="cart-image"></a>
                             <span class="pro-quantity">{{$p->pivot->amount}}X</span>
                         </div>
                         <div class="cart-content">
-                            <h6><a href="{{route('product_page', ['url'=>$p->url])}}">Printed Summer Red </a></h6>
+                            <h6><a href="{{route('product_page', ['url'=>$p->url])}}">{{$p->name}}</a></h6>
                             <span class="cart-price">{{$p->price}}</span>
                             {{--<span>Size: S</span>
                             <span>Color: Yellow</span>--}}

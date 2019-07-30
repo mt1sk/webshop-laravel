@@ -149,11 +149,7 @@ License: You must have a valid license purchased only from templatemonster to le
                     <div class="media">
                         <div class="media-img-wrap">
                             <div class="avatar">
-                                @if(Auth::user()->photo)
-                                    <img src="{{Auth::user()->imageView()}}" alt="user" class="avatar-img rounded-circle">
-                                @else
-                                    <img src="/adm/img/avatar12.jpg" alt="user" class="avatar-img rounded-circle">
-                                @endif
+                                <img src="{{Auth::user()->showImage()}}" alt="user" class="avatar-img rounded-circle">
                             </div>
                             <span class="badge badge-success badge-indicator"></span>
                         </div>

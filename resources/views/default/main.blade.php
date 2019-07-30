@@ -84,13 +84,8 @@
                             <!-- Product Image Start -->
                             <div class="pro-img">
                                 <a href="{{route('brand_page', ['url'=>$b->url])}}">
-                                    @if(!empty($b->img))
-                                        <img class="primary-img" src="{{$b->imageView()}}" alt="{{$b->name}}">
-                                        <img class="secondary-img" src="{{$b->imageView()}}" alt="{{$b->name}}">
-                                    @else
-                                        <img class="primary-img" src="/img/products/1.jpg" alt="{{$b->name}}">
-                                        <img class="secondary-img" src="/img/products/7.jpg" alt="{{$b->name}}">
-                                    @endif
+                                    <img class="primary-img" src="{{$b->showImage()}}" alt="{{$b->name}}">
+                                    <img class="secondary-img" src="{{$b->showImage()}}" alt="{{$b->name}}">
                                 </a>
                             </div>
                             <!-- Product Image End -->

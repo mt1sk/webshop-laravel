@@ -46,9 +46,7 @@
                                         @foreach($products as $product)
                                             <tr>
                                                 <td class="col-lg-1">
-                                                    @if(!empty($product->image))
-                                                        <img src="{{$product->imageView()}}" width="50" height="50"/>
-                                                    @endif
+                                                    <img src="{{$product->showImage()}}" width="50" height="50"/>
                                                 </td>
                                                 <td class="col-lg-6">{{$product->name}}</td>
                                                 <td class="col-lg-1">

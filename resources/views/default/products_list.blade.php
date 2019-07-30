@@ -456,16 +456,8 @@
                                             <div class="col-lg-4 col-md-5 col-sm-12">
                                                 <div class="pro-img">
                                                     <a href="{{route('product_page', ['url'=>$p->url])}}">
-                                                        @if(!empty($p->image))
-                                                            <img class="primary-img" src="{{$p->imageView()}}" alt="{{$p->name}}">
-                                                        @else
-                                                            <img class="primary-img" src="/img/products/40.jpg" alt="{{$p->name}}">
-                                                        @endif
-                                                        @if(!empty($p->image2))
-                                                            <img class="secondary-img" src="{{$p->imageView(1)}}" alt="{{$p->name}}">
-                                                        @else
-                                                            <img class="secondary-img" src="/img/products/41.jpg" alt="{{$p->name}}">
-                                                        @endif
+                                                        <img class="primary-img" src="{{$p->showImage()}}" alt="{{$p->name}}">
+                                                        <img class="secondary-img" src="{{$p->showImage(1)}}" alt="{{$p->name}}">
                                                     </a>
                                                     <a href="#" class="quick_view" data-toggle="modal" data-target="#myModal" title="Quick View"><i class="lnr lnr-magnifier"></i></a>
                                                     {{--<span class="sticker-new">new</span>

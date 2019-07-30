@@ -45,9 +45,7 @@
                                         @foreach($managers as $manager)
                                             <tr>
                                                 <th class="col-lg-1">
-                                                    @if(!empty($manager->photo))
-                                                        <img src="{{$manager->imageView()}}" width="50" height="50"/>
-                                                    @endif
+                                                    <img src="{{$manager->showImage()}}" width="50" height="50"/>
                                                 </th>
                                                 <td class="col-lg-7">{{$manager->name}} ({{$manager->email}})</td>
                                                 <td class="col-lg-1">

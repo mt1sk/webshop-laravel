@@ -28,26 +28,14 @@
                         <!-- Thumbnail Large Image start -->
                         <div class="tab-content">
                             <div id="thumb1" class="tab-pane fade show active">
-                                @if(!empty($product->image))
-                                    <a data-fancybox="images_product" href="{{$product->imageView()}}">
-                                        <img src="{{$product->imageView()}}" alt="{{$product->name}}">
-                                    </a>
-                                @else
-                                    <a data-fancybox="images_product" href="/img/products/35.jpg">
-                                        <img src="/img/products/35.jpg" alt="{{$product->name}}">
-                                    </a>
-                                @endif
+                                <a data-fancybox="images_product" href="{{$product->showImage()}}">
+                                    <img src="{{$product->showImage()}}" alt="{{$product->name}}">
+                                </a>
                             </div>
                             <div id="thumb2" class="tab-pane fade">
-                                @if(!empty($product->image2))
-                                    <a data-fancybox="images_product" href="{{$product->imageView(1)}}">
-                                        <img src="{{$product->imageView(1)}}" alt="{{$product->name}}">
-                                    </a>
-                                @else
-                                    <a data-fancybox="images_product" href="/img/products/13.jpg">
-                                        <img src="/img/products/13.jpg" alt="{{$product->name}}">
-                                    </a>
-                                @endif
+                                <a data-fancybox="images_product" href="{{$product->showImage(1)}}">
+                                    <img src="{{$product->showImage(1)}}" alt="{{$product->name}}">
+                                </a>
                             </div>
                         </div>
                         <!-- Thumbnail Large Image End -->
@@ -56,18 +44,10 @@
                         <div class="product-thumbnail mt-15">
                             <div class="thumb-menu owl-carousel nav tabs-area" role="tablist">
                                 <a class="active" data-toggle="tab" href="#thumb1">
-                                    @if(!empty($product->image))
-                                        <img src="{{$product->imageView()}}" alt="{{$product->name}}">
-                                    @else
-                                        <img src="/img/products/35.jpg" alt="{{$product->name}}">
-                                    @endif
+                                    <img src="{{$product->showImage()}}" alt="{{$product->name}}">
                                 </a>
                                 <a data-toggle="tab" href="#thumb2">
-                                    @if(!empty($product->image2))
-                                        <img src="{{$product->imageView(1)}}" alt="{{$product->name}}">
-                                    @else
-                                        <img src="/img/products/13.jpg" alt="{{$product->name}}">
-                                    @endif
+                                    <img src="{{$product->showImage(1)}}" alt="{{$product->name}}">
                                 </a>
                             </div>
                         </div>

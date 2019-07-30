@@ -39,11 +39,13 @@
                                         @foreach($order->purchases as $p)
                                             <tr class="cart_item">
                                                 <td class="col-lg-1">
-                                                    @if(!empty($p->product->image))
+                                                    @isset($p->product)
                                                         <a href="{{route('product_page', ['url'=>$p->product->url])}}">
-                                                            <img src="{{$p->product->imageView()}}" height="50" />
+                                                            <img src="{{$p->product->showImage()}}" height="50" />
                                                         </a>
-                                                    @endif
+                                                    @else
+                                                        <img src="{{asset('/img/no-photo-available.png')}}" height="50" />
+                                                    @endisset
                                                 </td>
                                                 <td class="col-lg-5 product-name">
                                                     @isset($p->product)

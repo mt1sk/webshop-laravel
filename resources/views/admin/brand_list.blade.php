@@ -45,9 +45,7 @@
                                         @foreach($brands as $brand)
                                             <tr>
                                                 <th class="col-lg-1">
-                                                    @if(!empty($brand->img))
-                                                        <img src="{{$brand->imageView()}}" width="50" height="50"/>
-                                                    @endif
+                                                    <img src="{{$brand->showImage()}}" width="50" height="50"/>
                                                 </th>
                                                 <td class="col-lg-7">{{$brand->name}}</td>
                                                 <td class="col-lg-1">

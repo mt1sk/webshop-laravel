@@ -25,11 +25,7 @@
                                 <div class="single-latest-blog">
                                     <div class="blog-img">
                                         <a href="{{route('brand_page', ['url'=>$b->url])}}">
-                                            @if(!empty($b->img))
-                                                <img src="{{$b->imageView()}}" alt="{{$b->name}}">
-                                            @else
-                                                <img src="img/blog/1.jpg" alt="{{$b->name}}">
-                                            @endif
+                                            <img src="{{$b->showImage()}}" alt="{{$b->name}}">
                                         </a>
                                     </div>
                                     <div class="blog-desc">

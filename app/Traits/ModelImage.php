@@ -50,13 +50,19 @@ trait ModelImage
         return asset('/storage/'.$this->resolveOriginalDir($imageNumber)).'/'.$this->{$this->resolveFieldName($imageNumber)};
     }
 
+    public function showImage($imageNumber = 0, $options = [])
+    {
+        $field = $this->resolveFieldName($imageNumber);
+        return !empty($this->{$field}) ? $this->imageView($imageNumber, $options) : asset('/img/no-photo-available.png');
+    }
+
     /**
      * Override list of original images directories
      * @return string|array
      */
     protected function originalDir()
     {
-        return '';
+        return 'images';
     }
 
     /**

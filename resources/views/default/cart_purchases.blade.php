@@ -14,11 +14,9 @@
             @foreach($cart->products as $p)
                 <tr class="cart_item">
                     <td class="col-lg-1">
-                        @if(!empty($p->image))
-                            <a href="{{route('product_page', ['url'=>$p->url])}}">
-                                <img src="{{$p->imageView()}}" height="50" />
-                            </a>
-                        @endif
+                        <a href="{{route('product_page', ['url'=>$p->url])}}">
+                            <img src="{{$p->showImage()}}" height="50" />
+                        </a>
                     </td>
                     <td class="col-lg-4 product-name">
                         <a href="{{route('product_page', ['url'=>$p->url])}}">{{$p->name}}</a>
