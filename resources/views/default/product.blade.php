@@ -270,24 +270,25 @@
     <!-- Product Thumbnail Description End -->
 
     <!-- Realted Products Start Here -->
-    <div class="hot-deal-products off-white-bg pt-100 pb-90 pt-sm-60 pb-sm-50">
-        <div class="container">
-            <!-- Product Title Start -->
-            <div class="post-title pb-30">
-                <h2>Realted Products</h2>
-            </div>
-            <!-- Product Title End -->
-            <!-- Hot Deal Product Activation Start -->
-            <div class="hot-deal-active owl-carousel">
-                @for($i=0/*, $p=$product*/; $i<7; $i++)
-                    @php($p=$product)
-                    @include('default.product_item')
-                @endfor
-            </div>
-            <!-- Hot Deal Product Active End -->
+    @if(!$product->related_products->isEmpty())
+        <div class="hot-deal-products off-white-bg pt-100 pb-90 pt-sm-60 pb-sm-50">
+            <div class="container">
+                <!-- Product Title Start -->
+                <div class="post-title pb-30">
+                    <h2>Related Products</h2>
+                </div>
+                <!-- Product Title End -->
+                <!-- Hot Deal Product Activation Start -->
+                <div class="hot-deal-active owl-carousel">
+                    @foreach($product->related_products as $p)
+                        @include('default.product_item')
+                    @endforeach
+                </div>
+                <!-- Hot Deal Product Active End -->
 
+            </div>
+            <!-- Container End -->
         </div>
-        <!-- Container End -->
-    </div>
+    @endif
     <!-- Realated Products End Here -->
 @endsection

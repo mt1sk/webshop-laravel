@@ -47,9 +47,11 @@ class ProductController extends IndexController
         $view = view('admin.product_create');
         $categories = Category::all();
         $brands = Brand::all();
+        $all_products = Product::all();
 
         $view->with('categories', $categories);
         $view->with('brands', $brands);
+        $view->with('all_products', $all_products);
         $view->with('title', 'New product');
         return $view;
     }
@@ -101,6 +103,9 @@ class ProductController extends IndexController
         if (null != $file) {
             $product->saveImage($file, ['image_num'=>1]);
         }
+
+        $related_ids = $request->input('related_products', []);
+        $product->related_products()->attach($related_ids);
         return redirect()->route('products.edit', ['id'=>$product->id]);
     }
 
@@ -131,6 +136,7 @@ class ProductController extends IndexController
         $view->with('title', $product->name);
         $categories = Category::all();
         $brands = Brand::all();
+        $all_products = Product::all();
 
         $er = $request->session()->get('errors');
         if (!empty($er)) {
@@ -147,10 +153,16 @@ class ProductController extends IndexController
             $product->brand_id = $request->old('brand_id');
             $product->price = $request->old('price');
             $product->old_price = $request->old('old_price');
+
+            $related_products = $request->old('related_products');
+        } else {
+            $related_products = $product->related_products()->allRelatedIds()->all();
         }
 
         $view->with('categories', $categories);
         $view->with('brands', $brands);
+        $view->with('all_products', $all_products);
+        $view->with('related_products', $related_products);
         $view->with('product', $product);
         return $view;
     }
@@ -209,6 +221,11 @@ class ProductController extends IndexController
         if (null != $file) {
             $product->saveImage($file, ['image_num'=>1]);
         }
+
+        $current_related_ids = $product->related_products()->allRelatedIds()->all();
+        $related_ids = $request->input('related_products', []);
+        $product->related_products()->detach(array_diff($current_related_ids, $related_ids));
+        $product->related_products()->attach(array_diff($related_ids, $current_related_ids));
         return redirect()->route('products.edit', ['id'=>$product->id]);
     }
 

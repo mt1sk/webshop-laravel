@@ -16,6 +16,11 @@ class Product extends Model
 
     protected $perPage = 20;
 
+    public function related_products()
+    {
+        return $this->belongsToMany(Product::class, 'related_product', 'product_id', 'related_id');
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);

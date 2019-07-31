@@ -163,6 +163,19 @@
                                                 @endforeach
                                             </select>
                                         </div>
+
+                                        <div class="row pt-30">
+                                            <div class="col-md-12">
+                                                <label>Related products</label>
+                                                <select name="related_products[]" class="select2 select2-multiple" multiple="multiple" data-placeholder="Choose">
+                                                    @foreach($all_products as $p)
+                                                        @if($p->id != $product->id)
+                                                            <option value="{{$p->id}}" @if(in_array($p->id, $related_products)) selected @endif>{{$p->name}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-md-12 d-none">
                                         <div class="form-group">
