@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Brand;
 use App\Manager;
+use App\Payment;
 use App\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
@@ -39,6 +40,9 @@ class AppServiceProvider extends ServiceProvider
         });
         Manager::deleting(function (Manager $manager) {
             $manager->deleteImage();
+        });
+        Payment::deleting(function (Payment $payment) {
+            $payment->deleteImage();
         });
     }
 }

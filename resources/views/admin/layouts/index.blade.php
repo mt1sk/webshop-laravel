@@ -258,6 +258,11 @@ License: You must have a valid license purchased only from templatemonster to le
                                             <a class="nav-link" href="{{route('managers.list')}}">Managers</a>
                                         </li>
                                     @endcan
+                                    @can('list', \App\Payment::class)
+                                        <li class="nav-item @if($menu_item=='payments') active @endif">
+                                            <a class="nav-link" href="{{route('payments.list')}}">Payment methods</a>
+                                        </li>
+                                    @endcan
                                     <li class="nav-item @if($menu_item=='settings') active @endif">
                                         <a class="nav-link" href="javascript:;">Settings</a>
                                     </li>

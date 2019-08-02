@@ -40,6 +40,9 @@ Route::group(['prefix'=>'administrator', 'middleware'=>['auth:administrator']], 
 
     Route::get('coupons/list', ['as'=>'coupons.list', 'uses'=>'Admin\CouponController']);
     Route::resource('coupons', 'Admin\CouponController', ['except'=>['index', 'show']]);
+
+    Route::get('payments/list', ['as'=>'payments.list', 'uses'=>'Admin\PaymentController']);
+    Route::resource('payments', 'Admin\PaymentController', ['except'=>['index', 'show']]);
 });
 
 Auth::routes(['verify' => true]);

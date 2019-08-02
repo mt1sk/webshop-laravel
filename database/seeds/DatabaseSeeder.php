@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             BrandsSeeder::class,
             ProductsSeeder::class,
             CouponsSeeder::class,
+            PaymentsSeeder::class,
         ]);
     }
 }
