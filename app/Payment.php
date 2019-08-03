@@ -12,6 +12,18 @@ class Payment extends Model
         'images/payments',
     ];
 
+    protected $casts = [
+        'settings'  => 'array',
+    ];
+
+    /*protected function castAttribute($key, $value)
+    {
+        if ($this->getCastType($key) == 'array' && (is_null($value) || $value == '')) {
+            return [];
+        }
+        return parent::castAttribute($key, $value);
+    }*/
+
     protected function getId()
     {
         return $this->id;
@@ -25,6 +37,11 @@ class Payment extends Model
     protected function fieldName()
     {
         return 'icon';
+    }
+
+    public function getSetting($settingField)
+    {
+        return $this->settings[$settingField] ?? '';
     }
 
 }

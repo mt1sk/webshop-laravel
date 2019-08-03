@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Payment;
+use App\Payments\Module;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class PaymentController extends IndexController
 {
@@ -44,6 +46,7 @@ class PaymentController extends IndexController
         }
 
         $view = view('admin.payment_create');
+        $view->with('payment_modules', Module::getModuleConfigList());
         $view->with('title', 'Payments list');
         return $view;
     }
@@ -60,9 +63,9 @@ class PaymentController extends IndexController
             return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
         }
 
-        // TODO module is required & in the array
         $rules = [
             'name'  => 'required',
+            'module'=> ['required', Rule::in(array_keys(Module::getModuleConfigList()))],
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
@@ -71,9 +74,10 @@ class PaymentController extends IndexController
 
         $payment = new Payment();
         $payment->name = $request->get('name');
+        $payment->module = $request->get('module');
         $payment->full_text = $request->get('full_text');
         $payment->enabled = $request->filled('enabled');
-        // TODO settings
+        $payment->settings = $request->get('settings', []);
         $payment->save();
         $file = $request->file('icon');
         if (null != $file) {
@@ -108,14 +112,15 @@ class PaymentController extends IndexController
         $er = $request->session()->get('errors');
         if (!empty($er)) {
             $payment->name = $request->old('name');
-            // TODO module
+            $payment->module = $request->old('module');
             $payment->full_text = $request->old('full_text');
             $payment->enabled = (bool)$request->old('enabled');
-            // TODO settings
+            $payment->settings = $request->old('settings', []);
         }
 
         $view = view('admin.payment_edit');
         $view->with('payment', $payment);
+        $view->with('payment_modules', Module::getModuleConfigList());
         $view->with('title', $payment->name);
         return $view;
     }
@@ -133,9 +138,9 @@ class PaymentController extends IndexController
             return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
         }
 
-        // TODO module is required & in the array
         $rules = [
             'name'  => 'required',
+            'module'=> ['required', Rule::in(array_keys(Module::getModuleConfigList()))],
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
@@ -143,9 +148,10 @@ class PaymentController extends IndexController
         }
 
         $payment->name = $request->get('name');
+        $payment->module = $request->get('module');
         $payment->full_text = $request->get('full_text');
         $payment->enabled = $request->filled('enabled');
-        // TODO settings
+        $payment->settings = $request->get('settings', []);
         $payment->save();
 
         if ($request->get('delete_icon')) {

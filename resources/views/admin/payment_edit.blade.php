@@ -48,6 +48,16 @@
                                                 <label class="custom-control-label" for="enabled">Enable</label>
                                             </div>
                                         </div>
+
+                                        <div class="form-group">
+                                            <label>Module</label>
+                                            <select name="module" class="form-control select2 fn_select_module">
+                                                <option value="" @empty($payment->module) selected @endempty>--Empty--</option>
+                                                @foreach($payment_modules as $value=>$details)
+                                                    <option value="{{$value}}" @if($payment->module==$value) selected @endif>{{$details['name']}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
 
                                     <div class="col-md-6">
@@ -79,6 +89,29 @@
                                     </div>
 
                                     <div class="col-md-12">
+                                        @foreach($payment_modules as $value=>$details)
+                                            @if(!empty($details['settings']))
+                                                <div class="row fn_module_block" data-module="{{$value}}" style="display: none;">
+                                                    @foreach($details['settings'] as $setting)
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                @empty($setting['options'])
+                                                                    <label for="{{$loop->iteration}}_{{$setting['field']}}">{{$setting['name']}}</label>
+                                                                    <input class="form-control" id="{{$loop->iteration}}_{{$setting['field']}}" name="settings[{{$setting['field']}}]" placeholder="" value="{{$payment->getSetting($setting['field'])}}" type="text">
+                                                                @else
+                                                                    <label>{{$setting['name']}}</label>
+                                                                    <select name="settings[{{$setting['field']}}]" class="form-control select2">
+                                                                        @foreach($setting['options'] as $option_value=>$option_name)
+                                                                            <option value="{{$option_value}}" @if($option_value == $payment->getSetting($setting['field'])) selected @endif>{{$option_name}}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        @endforeach
                                     </div>
 
                                     <div class="col-md-12">
@@ -129,6 +162,17 @@
                 $(this).closest('.fn_image_block').remove();
                 return false;
             });
+
+            $(document).on('change', '.fn_select_module', function() {
+                var block = $('.fn_module_block');
+                block.find("input, select, textarea").attr("disabled", true);
+                block.hide();
+
+                var block_to_enable = $('.fn_module_block[data-module="' + $(this).val() + '"]');
+                block_to_enable.find("input, select, textarea").attr("disabled", false);
+                block_to_enable.show();
+            });
+            $('.fn_select_module').trigger('change');
         });
     </script>
 @endsection
