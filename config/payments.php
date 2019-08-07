@@ -19,4 +19,41 @@ return [
             ],
         ],*/
     ],
+    'receipt'   => [
+        'name'      => 'Bank receipt',
+        'settings' => [
+            [
+                'name'  => 'Recipient',
+                'field' => 'recipient',
+            ],
+            [
+                'name'  => 'Recipient INN',
+                'field' => 'inn',
+            ],
+            [
+                'name'  => 'Recipient account',
+                'field' => 'account',
+            ],
+            [
+                'name'  => 'Recipient bank',
+                'field' => 'bank',
+            ],
+            [
+                'name'  => 'BIK',
+                'field' => 'bik',
+            ],
+            [
+                'name'  => 'Correspondent account',
+                'field' => 'correspondent_account',
+            ],
+            [
+                'name'  => 'Currency',
+                'field' => 'banknote',
+            ],
+            [
+                'name'  => 'Coins',
+                'field' => 'pence',
+            ],
+        ],
+    ],
 ];

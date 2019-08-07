@@ -2,30 +2,37 @@
 
 namespace App\Payments;
 
+use App\Order;
 use App\Payment;
+use Illuminate\Http\Request;
 
 abstract class Module
 {
     protected $payment;
 
-    abstract public function callback();
+    abstract public function callback(Request $request, Order $order);
 
     public function __construct(Payment $payment)
     {
         $this->payment = $payment;
     }
 
-    public function showForm()
+    public function renderForm(Order $order)
     {
+        $view = view('default.payment_forms');
+        $view->with('order', $order);
+        $view->with('payment', $this->payment);
+        $view->with('payment_module', $this);
+        return $view->render();
     }
 
-    public function getConfig()
+    public function getConfig($key = '')
     {
-        $paymentsConfig = config('payments.'.strtolower(class_basename(static::class)));
+        $paymentsConfig = config('payments.'.strtolower(str_replace('Module', '', class_basename(static::class))));
         if (!isset($paymentsConfig['settings'])) {
             $paymentsConfig['settings'] = [];
         }
-        return $paymentsConfig;
+        return $paymentsConfig[$key] ?? $paymentsConfig;
     }
 
     public static function getModuleConfigList() {

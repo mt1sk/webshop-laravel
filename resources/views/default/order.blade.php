@@ -172,6 +172,37 @@
                         </div>
                     </div>--}}
                 </div>
+
+                @if(!empty($order->payment))
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="checkbox-form mb-sm-40">
+                                <h3>Payment</h3>
+                                <div class="card">
+                                    <div class="card-header" id="headingone">
+                                        <h5 class="mb-0">
+                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                {{$order->payment->name}}
+                                            </a>
+                                        </h5>
+                                    </div>
+
+                                    {{--@if(!empty($order->payment->full_text))
+                                        <div class="">
+                                            <div class="card-body">
+                                                <p>
+                                                    {!! $order->payment->full_text !!}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    @endif--}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+                {!! $payment_module_form !!}
             </div>
         </div>
         <!-- checkout-area end -->
