@@ -56,4 +56,17 @@ return [
             ],
         ],
     ],
+    'liqpay'   => [
+        'name'      => 'LiqPay',
+        'settings' => [
+            [
+                'name'  => 'Public key',
+                'field' => 'public_key',
+            ],
+            [
+                'name'  => 'Private key',
+                'field' => 'private_key',
+            ],
+        ],
+    ],
 ];

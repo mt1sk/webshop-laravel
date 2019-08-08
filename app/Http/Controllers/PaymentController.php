@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\Payments\PaymentModuleFactory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
 {
     public function callback(Request $request) {
+        Log::info("Payment callback parameters: ".print_r($request->all(), true));
         $order_id = $request->get('order_id');
         $order = Order::findOrFail($order_id);
         if (empty($order->payment)) {
