@@ -202,7 +202,19 @@
                     </div>
                 @endif
 
-                {!! $payment_module_form !!}
+                <div class="row" id="order_payment_method">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="checkbox-form mb-sm-40">
+                            @if(!$order->is_paid)
+                                {!! $payment_module_form !!}
+                            @else
+                                <div class="alert alert-success mt-15">
+                                    The order is paid
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- checkout-area end -->

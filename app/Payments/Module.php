@@ -5,6 +5,7 @@ namespace App\Payments;
 use App\Order;
 use App\Payment;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 abstract class Module
 {
@@ -17,13 +18,13 @@ abstract class Module
         $this->payment = $payment;
     }
 
-    public function renderForm(Order $order)
+    public function renderForm(Order $order): View
     {
         $view = view('default.payment_forms');
         $view->with('order', $order);
         $view->with('payment', $this->payment);
         $view->with('payment_module', $this);
-        return $view->render();
+        return $view;
     }
 
     public function getConfig($key = '')
