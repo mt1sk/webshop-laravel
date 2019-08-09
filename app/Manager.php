@@ -27,6 +27,9 @@ class Manager extends Authenticatable
 
         'payment_list'=>'Payments list', 'payment_view'=>'Payment view', 'payment_create'=>'Payment create',
         'payment_update'=>'Payment edit', 'payment_delete'=>'Payment delete',
+
+        'delivery_list'=>'Deliveries list', 'delivery_view'=>'Delivery view', 'delivery_create'=>'Delivery create',
+        'delivery_update'=>'Delivery edit', 'delivery_delete'=>'Delivery delete',
     ];
 
     protected static $permissions_list;

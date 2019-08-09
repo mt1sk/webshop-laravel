@@ -43,6 +43,9 @@ Route::group(['prefix'=>'administrator', 'middleware'=>['auth:administrator']], 
 
     Route::get('payments/list', ['as'=>'payments.list', 'uses'=>'Admin\PaymentController']);
     Route::resource('payments', 'Admin\PaymentController', ['except'=>['index', 'show']]);
+
+    Route::get('deliveries/list', ['as'=>'deliveries.list', 'uses'=>'Admin\DeliveryController']);
+    Route::resource('deliveries', 'Admin\DeliveryController', ['except'=>['index', 'show']]);
 });
 
 Auth::routes(['verify' => true]);

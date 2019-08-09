@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Brand;
+use App\Delivery;
 use App\Manager;
 use App\Payment;
 use App\Product;
@@ -43,6 +44,9 @@ class AppServiceProvider extends ServiceProvider
         });
         Payment::deleting(function (Payment $payment) {
             $payment->deleteImage();
+        });
+        Delivery::deleting(function (Delivery $delivery) {
+            $delivery->deleteImage();
         });
     }
 }
