@@ -44,4 +44,8 @@ class Payment extends Model
         return $this->settings[$settingField] ?? '';
     }
 
+    public function deliveries()
+    {
+        return $this->belongsToMany(Delivery::class);
+    }
 }

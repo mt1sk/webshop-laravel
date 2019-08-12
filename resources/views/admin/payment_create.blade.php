@@ -49,6 +49,15 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label>Delivery methods</label>
+                                            <select name="payment_deliveries[]" class="select2 select2-multiple" multiple="multiple" data-placeholder="Choose">
+                                                @foreach($all_deliveries as $d)
+                                                    <option value="{{$d->id}}" @if(in_array($d->id, old('payment_deliveries', []))) selected @endif>{{$d->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
                                             <label>Module</label>
                                             <select name="module" class="form-control select2 fn_select_module">
                                                 <option value="" @empty(old('module')) selected @endempty>--Empty--</option>

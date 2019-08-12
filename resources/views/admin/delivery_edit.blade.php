@@ -63,6 +63,15 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="form-group">
+                                            <label>Payment methods</label>
+                                            <select name="delivery_payments[]" class="select2 select2-multiple" multiple="multiple" data-placeholder="Choose">
+                                                @foreach($all_payments as $p)
+                                                    <option value="{{$p->id}}" @if(in_array($p->id, $delivery_payments)) selected @endif>{{$p->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
 
                                     <div class="col-md-6">

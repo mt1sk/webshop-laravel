@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Delivery;
 use App\Payment;
 use App\Payments\Module;
 use Illuminate\Http\Request;
@@ -45,8 +46,11 @@ class PaymentController extends IndexController
             return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
         }
 
+        $all_deliveries = Delivery::all();
+
         $view = view('admin.payment_create');
         $view->with('payment_modules', Module::getModuleConfigList());
+        $view->with('all_deliveries', $all_deliveries);
         $view->with('title', 'Payments list');
         return $view;
     }
@@ -83,6 +87,9 @@ class PaymentController extends IndexController
         if (null != $file) {
             $payment->saveImage($file);
         }
+
+        $payment_deliveries = $request->input('payment_deliveries', []);
+        $payment->deliveries()->attach($payment_deliveries);
         return redirect()->route('payments.edit', ['id'=>$payment->id]);
     }
 
@@ -116,11 +123,19 @@ class PaymentController extends IndexController
             $payment->full_text = $request->old('full_text');
             $payment->enabled = (bool)$request->old('enabled');
             $payment->settings = $request->old('settings', []);
+
+            $payment_deliveries = $request->old('payment_deliveries');
+        } else {
+            $payment_deliveries = $payment->deliveries()->allRelatedIds()->all();
         }
+
+        $all_deliveries = Delivery::all();
 
         $view = view('admin.payment_edit');
         $view->with('payment', $payment);
         $view->with('payment_modules', Module::getModuleConfigList());
+        $view->with('all_deliveries', $all_deliveries);
+        $view->with('payment_deliveries', $payment_deliveries);
         $view->with('title', $payment->name);
         return $view;
     }
@@ -161,6 +176,11 @@ class PaymentController extends IndexController
         if (null != $file) {
             $payment->saveImage($file);
         }
+
+        $current_payment_deliveries = $payment->deliveries()->allRelatedIds()->all();
+        $payment_deliveries = $request->input('payment_deliveries', []);
+        $payment->deliveries()->detach(array_diff($current_payment_deliveries, $payment_deliveries));
+        $payment->deliveries()->attach(array_diff($payment_deliveries, $current_payment_deliveries));
         return redirect()->route('payments.edit', ['id'=>$payment->id]);
     }
 

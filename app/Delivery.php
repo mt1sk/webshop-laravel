@@ -27,4 +27,9 @@ class Delivery extends Model
     {
         return 'icon';
     }
+
+    public function payments()
+    {
+        return $this->belongsToMany(Payment::class);
+    }
 }

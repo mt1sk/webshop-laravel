@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Delivery;
+use App\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -43,7 +44,10 @@ class DeliveryController extends IndexController
             return redirect()->route('admin.home')->with(['message'=>'You don\'t have permissions']);
         }
 
+        $all_payments = Payment::all();
+
         $view = view('admin.delivery_create');
+        $view->with('all_payments', $all_payments);
         $view->with('title', 'New delivery');
         return $view;
     }
@@ -82,6 +86,9 @@ class DeliveryController extends IndexController
         if (null != $file) {
             $delivery->saveImage($file);
         }
+
+        $delivery_payments = $request->input('delivery_payments', []);
+        $delivery->payments()->attach($delivery_payments);
         return redirect()->route('deliveries.edit', ['id'=>$delivery->id]);
     }
 
@@ -116,10 +123,18 @@ class DeliveryController extends IndexController
             $delivery->price = $request->old('price');
             $delivery->free_from = $request->old('free_from');
             $delivery->enabled = (bool)$request->old('enabled');
+
+            $delivery_payments = $request->old('delivery_payments');
+        } else {
+            $delivery_payments = $delivery->payments()->allRelatedIds()->all();
         }
+
+        $all_payments = Payment::all();
 
         $view = view('admin.delivery_edit');
         $view->with('delivery', $delivery);
+        $view->with('all_payments', $all_payments);
+        $view->with('delivery_payments', $delivery_payments);
         $view->with('title', $delivery->name);
         return $view;
     }
@@ -161,6 +176,11 @@ class DeliveryController extends IndexController
         if (null != $file) {
             $delivery->saveImage($file);
         }
+
+        $current_delivery_payments = $delivery->payments()->allRelatedIds()->all();
+        $delivery_payments = $request->input('delivery_payments', []);
+        $delivery->payments()->detach(array_diff($current_delivery_payments, $delivery_payments));
+        $delivery->payments()->attach(array_diff($delivery_payments, $current_delivery_payments));
         return redirect()->route('deliveries.edit', ['id'=>$delivery->id]);
     }
 
