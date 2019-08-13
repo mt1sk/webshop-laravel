@@ -292,3 +292,7 @@
     @endif
     <!-- Realated Products End Here -->
 @endsection
+
+@section('include_footer')
+    <script src="/js/shop/wishlist.js"></script>
+@endsection

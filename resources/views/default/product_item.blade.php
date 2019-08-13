@@ -56,3 +56,7 @@
 </div>
 @endif
 <!-- Single Product End -->
+
+@section('include_footer')
+    <script src="/js/shop/wishlist.js"></script>
+@endsection

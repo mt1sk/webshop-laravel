@@ -40,6 +40,8 @@
 
     <!-- Modernizer js -->
     <script src="/js/vendor/modernizr-3.5.0.min.js"></script>
+
+    @yield('include_header')
 </head>
 
 <body>
@@ -660,166 +662,29 @@
 <script src="/js/main.js"></script>
 
 <script>
+    var current_route = '{{ Route::currentRouteName() }}',
+        cart_ajax_url = '{{ route('cart_ajax') }}',
+        wishlist_ajax_url = '{{ route('wishlist_ajax') }}',
+        csrf_token = '{{ csrf_token() }}';
+
     var error_ajax_cart_function = function (result) {
-        if (result.status == 419) {
+        if (result.status === 419) {
             alert('Please reload this page before shopping...');
         } else {
             alert(result.responseJSON.message ? result.responseJSON.message : 'error');
         }
     };
+
     $(function() {
         @isset($go_to_anchor)
             document.getElementById('{{$go_to_anchor}}').scrollIntoView();
         @endif
-
-        $(document).on('click', '.fn_cart_add', function() {
-            var product_block = $(this).closest('.fn_product_block'),
-                amount = Math.max(1, product_block.find('.fn_product_amount').val());
-            if (isNaN(amount)) {
-                amount = 1;
-            }
-            $.ajax({
-                url: "{{ route('cart_ajax') }}",
-                method: 'post',
-                data: {
-                    'action': 'add',
-                    'product_id': $(this).data('product_id'),
-                    'amount': amount,
-                    '_token': "{{csrf_token()}}",
-                },
-                success: function (result) {
-                    if (result.success) {
-                        $('.fn_cart_informer').replaceWith(result.cart_informer);
-                    }
-                },
-                error: error_ajax_cart_function,
-            });
-            return false;
-        });
-
-        $(document).on('click', '.fn_cart_delete', function() {
-            var is_cart_page = '{{Route::currentRouteName() == 'cart_page'}}';
-            $.ajax({
-                url: "{{ route('cart_ajax') }}",
-                method: 'post',
-                data: {
-                    'action': 'delete',
-                    'product_id': $(this).data('product_id'),
-                    'is_cart_page': is_cart_page,
-                    '_token': "{{csrf_token()}}",
-                },
-                success: function (result) {
-                    if (result.success) {
-                        $('.fn_cart_informer').replaceWith(result.cart_informer);
-                        if (is_cart_page) {
-                            if (!result.is_cart_empty) {
-                                $('.fn_cart_purchases').replaceWith(result.cart_purchases);
-                            } else {
-                                $('.fn_content').html('<div class="checkout-area pb-30 pl-10 pt-30 pb-sm-60">\n' +
-                                    '            <div class="container">\n' +
-                                    '                <div class="row">\n' +
-                                    '                    <div class="col-lg-12 col-md-12 pb-20">Empty cart</div></div></div></div>');
-                            }
-                        }
-                    }
-                },
-                error: error_ajax_cart_function,
-            });
-            return false;
-        });
-
-        $(document).on('change', '.fn_purchase_amount', function() {
-            var is_cart_page = '{{Route::currentRouteName() == 'cart_page'}}',
-                amount = Math.max(1, $(this).val());
-            $.ajax({
-                url: "{{ route('cart_ajax') }}",
-                method: 'post',
-                data: {
-                    'action': 'update',
-                    'product_id': $(this).data('product_id'),
-                    'amount': amount,
-                    'is_cart_page': is_cart_page,
-                    '_token': "{{csrf_token()}}",
-                },
-                success: function (result) {
-                    if (result.success) {
-                        $('.fn_cart_informer').replaceWith(result.cart_informer);
-                        if (is_cart_page) {
-                            $('.fn_cart_purchases').replaceWith(result.cart_purchases);
-                        }
-                    }
-                },
-                error: error_ajax_cart_function,
-            });
-            return false;
-        });
-
-        $(document).on('click', '.fn_coupon_apply', function () {
-            var is_cart_page = 1;
-            $('.fn_coupon_errors').remove();
-            $.ajax({
-                url: "{{ route('cart_ajax') }}",
-                method: 'post',
-                data: {
-                    'action': 'coupon_apply',
-                    'coupon_code': $('.fn_coupon_code').val(),
-                    'is_cart_page': is_cart_page,
-                    '_token': "{{csrf_token()}}",
-                },
-                success: function (result) {
-                    $('.fn_cart_informer').replaceWith(result.cart_informer);
-                    if (is_cart_page) {
-                        $('.fn_cart_purchases').replaceWith(result.cart_purchases);
-                        $('.fn_cart_coupon').replaceWith(result.cart_coupon);
-                    }
-                },
-                error: error_ajax_cart_function,
-            });
-            return false;
-        });
-
-        $(document).on('click', '.fn_wishlist', function() {
-            var product_block = $(this).closest('.fn_product_block'),
-                elem = $(this),
-                action = $(this).hasClass('fn_selected') ? 'delete' : 'add',
-                is_wishlist_page = '{{Route::currentRouteName() == 'wishlist_page'}}';
-            $.ajax({
-                url: "{{ route('wishlist_ajax') }}",
-                method: 'post',
-                data: {
-                    'action': action,
-                    'product_id': $(this).data('product_id'),
-                    'is_wishlist_page': is_wishlist_page,
-                    '_token': "{{csrf_token()}}",
-                },
-                success: function (result) {
-                    if (result.success) {
-                        $('.fn_wishlist_informer').replaceWith(result.wishlist_informer);
-                        if (is_wishlist_page) {
-                            if (!result.is_wishlist_empty) {
-                                $('.fn_wishlist_items').replaceWith(result.wishlist_items);
-                            } else {
-                                $('.fn_content').html('<div class="main-shop-page pt-20 pb-100 ptb-sm-60">\n' +
-                                    '            <div class="container">\n' +
-                                    '                <div class="row">\n' +
-                                    '                    <div class="col-lg-12 order-1 order-lg-2">WishList is empty.</div></div></div></div>');
-                            }
-                        } else {
-                            elem.toggleClass('fn_selected');
-
-                            var text = elem.data('toggle_text'),
-                                title = elem.find('span').text();
-                            elem.data('toggle_text', title);
-                            elem.find('span').text(text);
-                        }
-                    }
-                },
-                error: error_ajax_cart_function,
-            });
-            return false;
-        });
     });
 </script>
+
+<script src="/js/shop/cart.js"></script>
+
+@yield('include_footer')
 
 </body>
 
