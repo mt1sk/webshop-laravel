@@ -20,7 +20,6 @@ class IndexController extends Controller
         View::share('categories', $categories);
 
         $this->middleware(function ($request, $next) {
-            Cart::calculateCartAttributes();
             $cart = Cart::currentObject();
             View::share('cart', $cart);
             Cookie::queue('cart_id', $cart->id, 60*24*365);

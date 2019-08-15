@@ -57,21 +57,33 @@ class Cart extends Model
 
     public function getProductsCountAttribute()
     {
+        if (!isset($this->productsCount)) {
+            self::calculateCartAttributes();
+        }
         return $this->productsCount;
     }
 
     public function getSubtotalCostAttribute()
     {
+        if (!isset($this->subtotalCost)) {
+            self::calculateCartAttributes();
+        }
         return $this->subtotalCost;
     }
 
     public function getTotalCostAttribute()
     {
+        if (!isset($this->totalCost)) {
+            self::calculateCartAttributes();
+        }
         return $this->totalCost;
     }
 
     public function getCouponDiscountAttribute()
     {
+        if (!isset($this->couponDiscount)) {
+            self::calculateCartAttributes();
+        }
         return $this->couponDiscount;
     }
 

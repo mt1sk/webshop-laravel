@@ -26,7 +26,6 @@ class CartController extends Controller
                 $cart->touch();
             } else {
                 $coupon = Coupon::where('code', $coupon_code)->first();
-                Cart::calculateCartAttributes();
                 if (empty($coupon) || !$coupon->isValid($cart->subtotalCost)) {
                     $json['success'] = 0;
                     $json['error_message'] = $errors['coupon'] = 'Coupon is invalid';
