@@ -71,53 +71,7 @@
                                 <div class="your-order">
                                     <h3>Your order</h3>
                                     @include('default.cart_purchases')
-                                    <div class="payment-method">
-                                        <div id="accordion">
-                                            <div class="card">
-                                                <div class="card-header" id="headingone">
-                                                    <h5 class="mb-0">
-                                                        <a class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                            Direct Bank Transfer
-                                                        </a>
-                                                    </h5>
-                                                </div>
-
-                                                <div id="collapseOne" class="collapse show" aria-labelledby="headingone" data-parent="#accordion">
-                                                    <div class="card-body">
-                                                        <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="card-header" id="headingtwo">
-                                                    <h5 class="mb-0">
-                                                        <a class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                            Cheque Payment
-                                                        </a>
-                                                    </h5>
-                                                </div>
-                                                <div id="collapseTwo" class="collapse" aria-labelledby="headingtwo" data-parent="#accordion">
-                                                    <div class="card-body">
-                                                        <p>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="card-header" id="headingthree">
-                                                    <h5 class="mb-0">
-                                                        <a class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                            PayPal
-                                                        </a>
-                                                    </h5>
-                                                </div>
-                                                <div id="collapseThree" class="collapse" aria-labelledby="headingthree" data-parent="#accordion">
-                                                    <div class="card-body">
-                                                        <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @include('default.cart_delivery_payment')
                                 </div>
                             </div>
                             <div id="personal_data" class="col-lg-12 col-md-12">
@@ -214,4 +168,8 @@
             </div>
         @endif
     </div>
+@endsection
+
+@section('include_footer')
+    <script src="/js/shop/delivery_payment.js"></script>
 @endsection

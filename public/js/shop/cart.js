@@ -41,6 +41,7 @@ $(function () {
                     if (is_cart_page) {
                         if (!result.is_cart_empty) {
                             $('.fn_cart_purchases').replaceWith(result.cart_purchases);
+                            deliveryChange($('input[name="delivery_id"]').val());
                         } else {
                             $('.fn_content').html('<div class="checkout-area pb-30 pl-10 pt-30 pb-sm-60">\n' +
                                 '            <div class="container">\n' +
@@ -73,6 +74,7 @@ $(function () {
                     $('.fn_cart_informer').replaceWith(result.cart_informer);
                     if (is_cart_page) {
                         $('.fn_cart_purchases').replaceWith(result.cart_purchases);
+                        deliveryChange($('input[name="delivery_id"]').val());
                     }
                 }
             },
@@ -98,6 +100,7 @@ $(function () {
                 if (is_cart_page) {
                     $('.fn_cart_purchases').replaceWith(result.cart_purchases);
                     $('.fn_cart_coupon').replaceWith(result.cart_coupon);
+                    deliveryChange($('input[name="delivery_id"]').val());
                 }
             },
             error: error_ajax_cart_function,

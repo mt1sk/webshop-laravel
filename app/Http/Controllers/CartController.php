@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use App\Delivery;
 use App\Order;
 use App\Purchase;
 use Illuminate\Http\Request;
@@ -36,7 +37,14 @@ class CartController extends IndexController
             $order->comment = $request->get('comment');
             $order->url = uniqid();
             $order->user_id = Auth::id();
-            $order->total_price = $cart->totalCost;
+            $order->delivery_id = $request->get('delivery_id');
+            $order->payment_id = $request->get('payment_id');
+            $order->delivery_price = 0;
+            if (!empty($order->delivery_id) && ($delivery = Delivery::find($order->delivery_id)) &&
+                    $delivery->price > 0 && $delivery->free_from > $cart->totalCost) {
+                $order->delivery_price = $delivery->price;
+            }
+            $order->total_price = $cart->totalCost + $order->delivery_price;
             if (!empty($cart->coupon)) {
                 $order->coupon_discount = $cart->couponDiscount;
                 $order->coupon_id = $cart->coupon->id;
@@ -95,6 +103,22 @@ class CartController extends IndexController
         if (!empty($coupon)) {
             $data['coupon_code'] = $coupon->code;
         }
+
+        $deliveries = Delivery::all();
+        $delivery = $deliveries->first();
+        $delivery_payments = [];
+        if (!empty($delivery)) {
+            $delivery_payments = $delivery->payments->all();
+            $data['payment'] = reset($delivery_payments);
+
+            $cart = Cart::currentObject();
+            foreach ($delivery_payments as $payment) {
+                $payment->toPay = $cart->totalCost + ($delivery->free_from > $cart->totalCost ? $delivery->price : 0);
+            }
+        }
+        $data['deliveries'] = $deliveries;
+        $data['delivery'] = $delivery;
+        $data['delivery_payments'] = $delivery_payments;
 
         return $view->with($data);
     }

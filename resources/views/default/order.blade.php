@@ -81,6 +81,15 @@
                                                 <td><span class="amount">-${{$order->coupon_discount}}</span></td>
                                             </tr>
                                         @endif
+                                        @if($order->delivery_price > 0)
+                                            <tr class="cart-subtotal">
+                                                <td class=""></td>
+                                                <td class=""></td>
+                                                <td class=""></td>
+                                                <th>Delivery cost</th>
+                                                <td><span class="amount">+${{$order->delivery_price}}</span></td>
+                                            </tr>
+                                        @endif
                                         <tr class="order-total">
                                             <td class=""></td>
                                             <td class=""></td>
@@ -172,6 +181,35 @@
                         </div>
                     </div>--}}
                 </div>
+
+                @if(!empty($order->delivery))
+                    <div class="row pb-30">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="checkbox-form mb-sm-40">
+                                <h3>Delivery info</h3>
+                                <div class="card">
+                                    <div class="card-header" id="headingtwo">
+                                        <h5 class="mb-0">
+                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                {{$order->delivery->name}}
+                                            </a>
+                                        </h5>
+                                    </div>
+
+                                    {{--@if(!empty($order->delivery->full_text))
+                                        <div class="">
+                                            <div class="card-body">
+                                                <p>
+                                                    {!! $order->delivery->full_text !!}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    @endif--}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
 
                 @if(!empty($order->payment))
                     <div class="row">

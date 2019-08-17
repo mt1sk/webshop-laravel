@@ -665,6 +665,7 @@
     var current_route = '{{ Route::currentRouteName() }}',
         cart_ajax_url = '{{ route('cart_ajax') }}',
         wishlist_ajax_url = '{{ route('wishlist_ajax') }}',
+        delivery_payment_ajax_url = '{{ route('get_delivery_info') }}',
         csrf_token = '{{ csrf_token() }}';
 
     var error_ajax_cart_function = function (result) {

@@ -66,3 +66,5 @@ Route::post('/order/payment_callback', 'PaymentController@callback')->name('paym
 
 Route::post('/wishlist_ajax', 'Ajax\WishlistController')->name('wishlist_ajax');
 Route::get('/wishlist', 'WishlistController')->name('wishlist_page');
+
+Route::get('/delivery/get_details', 'Ajax\DeliveryController@getDetails')->name('get_delivery_info');
