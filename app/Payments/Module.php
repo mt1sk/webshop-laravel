@@ -9,7 +9,7 @@ use Illuminate\View\View;
 
 abstract class Module
 {
-    protected $payment;
+    private $payment;
 
     abstract public function callback(Request $request, Order $order);
 
@@ -25,6 +25,11 @@ abstract class Module
         $view->with('payment', $this->payment);
         $view->with('payment_module', $this);
         return $view;
+    }
+
+    public function getPayment(): Payment
+    {
+        return $this->payment;
     }
 
     public function getConfig($key = '')

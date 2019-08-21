@@ -24,42 +24,43 @@ class LiqPayModule extends Module
         if ($status !== 'success') {
             /*return redirect()->route('order_page', ['url'=>$order->url])->withErrors(['bad status']);*/
             Log::alert('Payment LiqPay callback error: "bad status"');
-            die('bad status');
+            print('bad status');return;
         }
 
         if ($type !== 'buy') {
             Log::alert('Payment LiqPay callback error: "bad type"');
-            die('bad type');
+            print('bad type');return;
         }
 
         $payment_currency = 'USD';
 
         if ($currency !== $payment_currency) {
             Log::alert('Payment LiqPay callback error: "bad currency"');
-            die('bad currency');
+            print('bad currency');return;
         }
 
         $mysignature = base64_encode(sha1($order->payment->getSetting('private_key').$amount.$currency.$public_key.$order->id.$type.$description.$status.$transaction_id.$sender_phone, 1));
         if ($mysignature !== $signature) {
             Log::alert('Payment LiqPay callback error: "bad sign - '.$signature.'"');
-            die('bad sign'.$signature);
+            print('bad sign'.$signature);return;
         }
 
         if ($order->is_paid) {
             Log::alert('Payment LiqPay callback error: "order already paid"');
-            die('order already paid');
+            print('order already paid');return;
         }
 
         if ($amount != round($order->total_price, 2) || $amount<=0) {
             Log::alert('Payment LiqPay callback error: "incorrect price"');
-            die('incorrect price');
+            print('incorrect price');return;
         }
 
         $order->is_paid = true;
         $order->save();
 
         Log::info('Payment LiqPay callback - OK');
-        exit;
+        print('OK');
+        return;
     }
 
     public function renderForm(Order $order): View
