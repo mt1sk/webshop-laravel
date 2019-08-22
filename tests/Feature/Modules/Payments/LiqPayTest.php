@@ -4,9 +4,9 @@ namespace Tests\Feature\Modules\Payments;
 
 use App\Order;
 use App\Payment;
-use App\Payments\LiqPayModule;
-use App\Payments\Module;
-use App\Payments\PaymentModuleFactory;
+use App\Modules\Payments\LiqPayModule;
+use App\Modules\Payments\Module;
+use App\Modules\Payments\PaymentModuleFactory;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -32,7 +32,7 @@ class LiqPayTest extends TestCase
     */
     public function testRenderForm(Module $module)
     {
-        $payment = $module->getPayment();
+        $payment = $module->getModuleObject();
         $order = new Order();
         $order->url = uniqid();
         $order->name = 'unit_test';

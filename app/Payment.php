@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Modules\CartModuleModel;
 
-class Payment extends Model
+class Payment extends CartModuleModel
 {
     use Traits\ModelImage;
 
@@ -15,14 +15,6 @@ class Payment extends Model
     protected $casts = [
         'settings'  => 'array',
     ];
-
-    /*protected function castAttribute($key, $value)
-    {
-        if ($this->getCastType($key) == 'array' && (is_null($value) || $value == '')) {
-            return [];
-        }
-        return parent::castAttribute($key, $value);
-    }*/
 
     protected function getId()
     {
@@ -37,11 +29,6 @@ class Payment extends Model
     protected function fieldName()
     {
         return 'icon';
-    }
-
-    public function getSetting($settingField)
-    {
-        return $this->settings[$settingField] ?? '';
     }
 
     public function deliveries()

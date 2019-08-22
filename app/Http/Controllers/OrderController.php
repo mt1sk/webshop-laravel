@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
-use App\Payments\PaymentModuleFactory;
+use App\Modules\Payments\PaymentModuleFactory;
 use Illuminate\Http\Request;
 
 class OrderController extends IndexController

@@ -4,9 +4,9 @@ namespace Tests\Feature\Modules\Payments;
 
 use App\Order;
 use App\Payment;
-use App\Payments\Module;
-use App\Payments\PaymentModuleFactory;
-use App\Payments\SimpleModule;
+use App\Modules\Payments\Module;
+use App\Modules\Payments\PaymentModuleFactory;
+use App\Modules\Payments\SimpleModule;
 use Illuminate\View\View;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Payments;
+namespace App\Modules\Payments;
 
 use App\Order;
 use Illuminate\Http\Request;
@@ -20,6 +20,7 @@ class ReceiptModule extends Module
         $pdf->SetFont('dejavusanscondensed','',8);
 
         // params
+        // TODO can take data from $this->moduleObject->getSetting('recipient')...
         $recipient = $request->get('recipient');
         $inn = $request->get('inn');
         $account = $request->get('account');

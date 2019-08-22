@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Payments;
+namespace App\Modules\Payments;
 
 use App\Order;
 use Illuminate\Http\Request;
@@ -39,6 +39,8 @@ class LiqPayModule extends Module
             print('bad currency');return;
         }
 
+        // TODO can get payment from $this->moduleObject...
+        /* $order->payment was already taken before anyway... */
         $mysignature = base64_encode(sha1($order->payment->getSetting('private_key').$amount.$currency.$public_key.$order->id.$type.$description.$status.$transaction_id.$sender_phone, 1));
         if ($mysignature !== $signature) {
             Log::alert('Payment LiqPay callback error: "bad sign - '.$signature.'"');
@@ -66,6 +68,8 @@ class LiqPayModule extends Module
     public function renderForm(Order $order): View
     {
         $view = parent::renderForm($order);
+        // TODO can get payment from $this->moduleObject...
+        /* $order->payment was already taken before anyway... */
         $public_key = $order->payment->getSetting('public_key');
         $private_key = $order->payment->getSetting('private_key');
         $currency = 'USD';
