@@ -39,9 +39,8 @@ class LiqPayModule extends Module
             print('bad currency');return;
         }
 
-        // TODO can get payment from $this->moduleObject...
-        /* $order->payment was already taken before anyway... */
-        $mysignature = base64_encode(sha1($order->payment->getSetting('private_key').$amount.$currency.$public_key.$order->id.$type.$description.$status.$transaction_id.$sender_phone, 1));
+        $private_key = $this->getModuleObject()->getSetting('private_key');
+        $mysignature = base64_encode(sha1($private_key.$amount.$currency.$public_key.$order->id.$type.$description.$status.$transaction_id.$sender_phone, 1));
         if ($mysignature !== $signature) {
             Log::alert('Payment LiqPay callback error: "bad sign - '.$signature.'"');
             print('bad sign'.$signature);return;
@@ -68,10 +67,8 @@ class LiqPayModule extends Module
     public function renderForm(Order $order): View
     {
         $view = parent::renderForm($order);
-        // TODO can get payment from $this->moduleObject...
-        /* $order->payment was already taken before anyway... */
-        $public_key = $order->payment->getSetting('public_key');
-        $private_key = $order->payment->getSetting('private_key');
+        $public_key = $this->getModuleObject()->getSetting('public_key');
+        $private_key = $this->getModuleObject()->getSetting('private_key');
         $currency = 'USD';
         $result_url = route('order_page', ['url'=>$order->url]);
         $server_url = route('payment_callback');

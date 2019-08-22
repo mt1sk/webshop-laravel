@@ -44,7 +44,7 @@ class LiqPayTest extends TestCase
         $order = Order::find($order->id);
 
         $view = $module->renderForm($order);
-        $this->assertEquals('default.payment_forms', $view->getName());
+        $this->assertEquals('default.'.$module::getConfigSection().'.'.$module::getModuleName(), $view->getName());
 
         $private_key = $payment->getSetting('private_key');
         $public_key = $payment->getSetting('public_key');

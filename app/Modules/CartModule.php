@@ -18,7 +18,7 @@ abstract class CartModule
     public function renderForm(Order $order): View
     {
         $objectName = strtolower(class_basename($this->moduleObject));
-        $view = view('default.'.$objectName.'_forms');
+        $view = view('default.'.self::getConfigSection().'.'.self::getModuleName());
         $view->with('order', $order);
         $view->with($objectName, $this->moduleObject);
         $view->with($objectName.'_module', $this);
@@ -35,7 +35,7 @@ abstract class CartModule
 
     public function getConfig($key = '')
     {
-        $paymentsConfig = config(self::getConfigSection().'.'.strtolower(str_replace('Module', '', class_basename(static::class))));
+        $paymentsConfig = config(self::getConfigSection().'.'.self::getModuleName());
         if (!isset($paymentsConfig['settings'])) {
             $paymentsConfig['settings'] = [];
         }
@@ -57,12 +57,17 @@ abstract class CartModule
         return $modules;
     }
 
-    protected static function getModuleDir(): string
+    public static function getModuleName()
+    {
+        return strtolower(str_replace('Module', '', class_basename(static::class)));
+    }
+
+    public static function getModuleDir(): string
     {
         return pathinfo((new \ReflectionClass(static::class))->getFilename(), PATHINFO_DIRNAME);
     }
 
-    protected static function getConfigSection(): string
+    public static function getConfigSection(): string
     {
         return strtolower(str_replace(__DIR__.'/', '', self::getModuleDir()));
     }

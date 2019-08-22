@@ -18,7 +18,7 @@ class OrderController extends IndexController
         $view->with('payment_module_form', !empty($payment_module) ? $payment_module->renderForm($order): '');
 
         $er = $request->session()->get('errors');
-        if (!empty($er)) {
+        if (!empty($er) && $er->has('payment_callback')) {
             $view->with('go_to_anchor', 'order_payment_method');
         }
 

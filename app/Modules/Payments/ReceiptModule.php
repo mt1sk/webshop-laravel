@@ -4,12 +4,22 @@ namespace App\Modules\Payments;
 
 use App\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use TCPDF;
 
 class ReceiptModule extends Module
 {
     public function callback(Request $request, Order $order)
     {
+        $rules = [
+            'name'      => 'required',
+            'address'   => 'required',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return redirect()->route('order_page', ['url'=>$order->url])->withErrors(['payment_callback'=>$validator->errors()->all()]);
+        }
+
         $name = $request->get('name');
         $address = $request->get('address');
 
@@ -20,17 +30,16 @@ class ReceiptModule extends Module
         $pdf->SetFont('dejavusanscondensed','',8);
 
         // params
-        // TODO can take data from $this->moduleObject->getSetting('recipient')...
-        $recipient = $request->get('recipient');
-        $inn = $request->get('inn');
-        $account = $request->get('account');
-        $bank = $request->get('bank');
-        $bik = $request->get('bik');
-        $correspondent_account = $request->get('correspondent_account');
-        $banknote = $request->get('banknote');
-        $pence = $request->get('pence');
-        $order_id = $request->get('order_id');
-        $amount = $request->get('amount');
+        $recipient = $this->getModuleObject()->getSetting('recipient');
+        $inn = $this->getModuleObject()->getSetting('inn');
+        $account = $this->getModuleObject()->getSetting('account');
+        $bank = $this->getModuleObject()->getSetting('bank');
+        $bik = $this->getModuleObject()->getSetting('bik');
+        $correspondent_account = $this->getModuleObject()->getSetting('correspondent_account');
+        $banknote = $this->getModuleObject()->getSetting('banknote');
+        $pence = $this->getModuleObject()->getSetting('pence');
+        $order_id = $order->id;
+        $amount = $order->total_price;
 
         //set document properties
         $pdf->setPrintHeader(false);
@@ -260,7 +269,7 @@ class ReceiptModule extends Module
 
         //Output the document
         $pdf->Output('receipt.pdf','I');
-        exit;
+        return;
     }
 
     private function textfield($pdf, $x, $y, $width, $text, $undertext)

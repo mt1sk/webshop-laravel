@@ -244,6 +244,15 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="checkbox-form mb-sm-40">
                             @if(!$order->is_paid)
+                                @if($errors->has('payment_callback'))
+                                    <div class="alert alert-danger mt-15">
+                                        <ul>
+                                            @foreach($errors->get('payment_callback') as $error)
+                                                <li>{{$error}}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                                 {!! $payment_module_form !!}
                             @else
                                 <div class="alert alert-success mt-15">

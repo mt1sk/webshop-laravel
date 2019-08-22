@@ -14,12 +14,12 @@ class PaymentController extends Controller
         $order_id = $request->get('order_id');
         $order = Order::findOrFail($order_id);
         if (empty($order->payment)) {
-            return redirect()->route('order_page', ['url'=>$order->url])->withErrors(['Payment method not found']);
+            return redirect()->route('order_page', ['url'=>$order->url])->withErrors(['payment_callback'=>'Payment method not found']);
         }
 
         $payment_module = PaymentModuleFactory::make($order->payment);
         if (empty($payment_module)) {
-            return redirect()->route('order_page', ['url'=>$order->url])->withErrors(['Payment module not found']);
+            return redirect()->route('order_page', ['url'=>$order->url])->withErrors(['payment_callback'=>'Payment module not found']);
         }
 
         $result = $payment_module->callback($request, $order);

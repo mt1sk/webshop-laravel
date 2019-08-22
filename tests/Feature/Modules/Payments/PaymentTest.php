@@ -60,7 +60,7 @@ class PaymentTest extends TestCase
         $view = $module->renderForm(new Order());
         $this->assertInstanceOf(View::class, $view);
 
-        $this->assertEquals('default.payment_forms', $view->getName());
+        $this->assertEquals('default.'.$module::getConfigSection().'.'.$module::getModuleName(), $view->getName());
 
         $data = $view->getData();
         $this->assertArrayHasKey('payment_module', $data);
