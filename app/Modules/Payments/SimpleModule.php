@@ -9,5 +9,6 @@ class SimpleModule extends Module
 {
     public function callback(Request $request, Order $order)
     {
+        return response('OK', 200);
     }
 }

@@ -269,7 +269,7 @@ class ReceiptModule extends Module
 
         //Output the document
         $pdf->Output('receipt.pdf','I');
-        return;
+        return response('OK', 200);
     }
 
     private function textfield($pdf, $x, $y, $width, $text, $undertext)

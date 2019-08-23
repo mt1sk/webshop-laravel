@@ -14,7 +14,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PaymentTest extends TestCase
 {
-    public function testPaymentModuleMake()
+    public function testMake()
     {
         $module = PaymentModuleFactory::make(null);
         $this->assertNull($module);
@@ -32,13 +32,17 @@ class PaymentTest extends TestCase
         $this->assertInstanceOf(Module::class, $module);
         $this->assertInstanceOf(SimpleModule::class, $module);
 
+        $payment->name = 'none';
+        $payment->settings = [];
+        $payment->save();
+
         return $module;
     }
 
     /**
-     * @depends testPaymentModuleMake
+     * @depends testMake
     */
-    public function testPaymentModule(Module $module)
+    public function testConfig(Module $module)
     {
         $moduleName = str_replace('Module', '', class_basename($module));
         $configList = Module::getModuleConfigList();
@@ -53,11 +57,20 @@ class PaymentTest extends TestCase
     }
 
     /**
-     * @depends testPaymentModule
+     * @depends testConfig
      */
-    public function testPaymentModuleRenderForm(Module $module)
+    public function testRenderForm(Module $module)
     {
-        $view = $module->renderForm(new Order());
+        $order = new Order();
+        $order->url = uniqid();
+        $order->name = 'unit_test';
+        $order->email = 'unit_test@unit.test';
+        $order->total_price = 42;
+        $order->delivery_price = 0;
+        $order->payment_id = $module->getModuleObject()->id;
+        $order->save();
+
+        $view = $module->renderForm($order);
         $this->assertInstanceOf(View::class, $view);
 
         $this->assertEquals('default.'.$module::getConfigSection().'.'.$module::getModuleName(), $view->getName());
@@ -69,5 +82,31 @@ class PaymentTest extends TestCase
         $this->assertInstanceOf(Module::class, $data['payment_module']);
         $this->assertInstanceOf(Payment::class, $data['payment']);
         $this->assertEquals($module, $data['payment_module']);
+
+        return $order;
+    }
+
+    /**
+     * @depends testRenderForm
+     */
+    public function testCallback(Order $order)
+    {
+        $response = $this->post(route('payment_callback'));
+        $response->assertStatus(404);
+
+        /* !!! only for SimpleModule*/
+        $response = $this->post(route('payment_callback', ['order_id'=>$order]));
+        $response->assertStatus(200);
+
+        $order->payment->module = 'nothing';
+        $order->payment->save();
+        $response = $this->post(route('payment_callback', ['order_id'=>$order]));
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors(['payment_callback'=>'Payment module not found']);
+
+        $order->payment()->dissociate()->save();
+        $response = $this->post(route('payment_callback', ['order_id'=>$order]));
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors(['payment_callback'=>'Payment method not found']);
     }
 }

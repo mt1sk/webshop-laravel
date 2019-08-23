@@ -22,46 +22,44 @@ class LiqPayModule extends Module
         $sender_phone		= $request->get('sender_phone');
 
         if ($status !== 'success') {
-            /*return redirect()->route('order_page', ['url'=>$order->url])->withErrors(['bad status']);*/
             Log::alert('Payment LiqPay callback error: "bad status"');
-            print('bad status');return;
+            return redirect()->route('order_page', ['url'=>$order->url])->withErrors(['payment_callback'=>'bad status']);
         }
 
         if ($type !== 'buy') {
             Log::alert('Payment LiqPay callback error: "bad type"');
-            print('bad type');return;
+            return redirect()->route('order_page', ['url'=>$order->url])->withErrors(['payment_callback'=>'bad type']);
         }
 
         $payment_currency = 'USD';
 
         if ($currency !== $payment_currency) {
             Log::alert('Payment LiqPay callback error: "bad currency"');
-            print('bad currency');return;
+            return redirect()->route('order_page', ['url'=>$order->url])->withErrors(['payment_callback'=>'bad currency']);
         }
 
         $private_key = $this->getModuleObject()->getSetting('private_key');
         $mysignature = base64_encode(sha1($private_key.$amount.$currency.$public_key.$order->id.$type.$description.$status.$transaction_id.$sender_phone, 1));
         if ($mysignature !== $signature) {
             Log::alert('Payment LiqPay callback error: "bad sign - '.$signature.'"');
-            print('bad sign'.$signature);return;
+            return redirect()->route('order_page', ['url'=>$order->url])->withErrors(['payment_callback'=>'bad sign'.$signature]);
         }
 
         if ($order->is_paid) {
             Log::alert('Payment LiqPay callback error: "order already paid"');
-            print('order already paid');return;
+            return redirect()->route('order_page', ['url'=>$order->url])->withErrors(['payment_callback'=>'order already paid']);
         }
 
         if ($amount != round($order->total_price, 2) || $amount<=0) {
             Log::alert('Payment LiqPay callback error: "incorrect price"');
-            print('incorrect price');return;
+            return redirect()->route('order_page', ['url'=>$order->url])->withErrors(['payment_callback'=>'incorrect price']);
         }
 
         $order->is_paid = true;
         $order->save();
 
         Log::info('Payment LiqPay callback - OK');
-        print('OK');
-        return;
+        return response('OK', 200);
     }
 
     public function renderForm(Order $order): View

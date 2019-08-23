@@ -70,14 +70,12 @@ class LiqPayTest extends TestCase
      */
     public function testCallbackBadStatus(Order $order)
     {
-        $response = $this->post(route('payment_callback'));
-        $response->assertStatus(404);
-
         $data = [
             'order_id'  => $order->id,
         ];
-        $this->expectOutputString('bad status');
-        $this->post(route('payment_callback'), $data);
+        $response = $this->post(route('payment_callback'), $data);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors(['payment_callback'=>'bad status']);
     }
 
     /**
@@ -89,8 +87,9 @@ class LiqPayTest extends TestCase
             'order_id'  => $order->id,
             'status'    => 'success',
         ];
-        $this->expectOutputString('bad type');
-        $this->post(route('payment_callback'), $data);
+        $response = $this->post(route('payment_callback'), $data);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors(['payment_callback'=>'bad type']);
     }
 
     /**
@@ -103,8 +102,9 @@ class LiqPayTest extends TestCase
             'status'    => 'success',
             'type'      => 'buy',
         ];
-        $this->expectOutputString('bad currency');
-        $this->post(route('payment_callback'), $data);
+        $response = $this->post(route('payment_callback'), $data);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors(['payment_callback'=>'bad currency']);
     }
 
     /**
@@ -119,8 +119,9 @@ class LiqPayTest extends TestCase
             'currency'  => 'USD',
             'signature' => 'incorrect',
         ];
-        $this->expectOutputString('bad sign'.$data['signature']);
-        $this->post(route('payment_callback'), $data);
+        $response = $this->post(route('payment_callback'), $data);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors(['payment_callback'=>'bad sign'.$data['signature']]);
     }
 
     /**
@@ -145,8 +146,11 @@ class LiqPayTest extends TestCase
 
         $order->is_paid = true;
         $order->save();
-        $this->expectOutputString('order already paid');
-        $this->post(route('payment_callback'), $data);
+
+        $response = $this->post(route('payment_callback'), $data);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors(['payment_callback'=>'order already paid']);
+
         $order->is_paid = false;
         $order->save();
     }
@@ -171,8 +175,9 @@ class LiqPayTest extends TestCase
         $private_key = $order->payment->getSetting('private_key');
         $data['signature'] = base64_encode(sha1($private_key.$data['amount'].$data['currency'].$data['public_key'].$order->id.'buy'.$data['description'].'success'.$data['transaction_id'].$data['sender_phone'], 1));
 
-        $this->expectOutputString('incorrect price');
-        $this->post(route('payment_callback'), $data);
+        $response = $this->post(route('payment_callback'), $data);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors(['payment_callback'=>'incorrect price']);
     }
 
     /**
@@ -195,8 +200,9 @@ class LiqPayTest extends TestCase
         $private_key = $order->payment->getSetting('private_key');
         $data['signature'] = base64_encode(sha1($private_key.$data['amount'].$data['currency'].$data['public_key'].$order->id.'buy'.$data['description'].'success'.$data['transaction_id'].$data['sender_phone'], 1));
 
-        $this->expectOutputString('incorrect price');
-        $this->post(route('payment_callback'), $data);
+        $response = $this->post(route('payment_callback'), $data);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors(['payment_callback'=>'incorrect price']);
     }
 
     /**
@@ -219,8 +225,9 @@ class LiqPayTest extends TestCase
         $private_key = $order->payment->getSetting('private_key');
         $data['signature'] = base64_encode(sha1($private_key.$data['amount'].$data['currency'].$data['public_key'].$order->id.'buy'.$data['description'].'success'.$data['transaction_id'].$data['sender_phone'], 1));
 
-        $this->expectOutputString('OK');
-        $this->post(route('payment_callback'), $data);
+        $response = $this->post(route('payment_callback'), $data);
+        $response->assertStatus(200);
+        $response->assertSessionHasNoErrors();
 
         $order = Order::find($order->id);
         $this->assertEquals(1, $order->is_paid);
