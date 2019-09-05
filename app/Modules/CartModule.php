@@ -15,13 +15,9 @@ abstract class CartModule
         $this->moduleObject = $object;
     }
 
-    public function renderForm(Order $order): View
+    public function renderForm($data = []): View
     {
-        $objectName = strtolower(class_basename($this->moduleObject));
-        $view = view('default.'.self::getConfigSection().'.'.self::getModuleName());
-        $view->with('order', $order);
-        $view->with($objectName, $this->moduleObject);
-        $view->with($objectName.'_module', $this);
+        $view = view('default.'.self::getConfigSection().'.'.self::getModuleName(), $data);
         return $view;
     }
 

@@ -62,9 +62,10 @@ class LiqPayModule extends Module
         return response('OK', 200);
     }
 
-    public function renderForm(Order $order): View
+    public function renderForm($data = []): View
     {
-        $view = parent::renderForm($order);
+        $view = parent::renderForm($data);
+        $order = $data['order'];
         $public_key = $this->getModuleObject()->getSetting('public_key');
         $private_key = $this->getModuleObject()->getSetting('private_key');
         $currency = 'USD';

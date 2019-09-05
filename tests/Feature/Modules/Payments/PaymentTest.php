@@ -70,18 +70,14 @@ class PaymentTest extends TestCase
         $order->payment_id = $module->getModuleObject()->id;
         $order->save();
 
-        $view = $module->renderForm($order);
+        $view = $module->renderForm(['order'=>$order]);
         $this->assertInstanceOf(View::class, $view);
 
         $this->assertEquals('default.'.$module::getConfigSection().'.'.$module::getModuleName(), $view->getName());
 
         $data = $view->getData();
-        $this->assertArrayHasKey('payment_module', $data);
-        $this->assertArrayHasKey('payment', $data);
-
-        $this->assertInstanceOf(Module::class, $data['payment_module']);
-        $this->assertInstanceOf(Payment::class, $data['payment']);
-        $this->assertEquals($module, $data['payment_module']);
+        $this->assertArrayHasKey('order', $data);
+        $this->assertEquals($order, $data['order']);
 
         return $order;
     }

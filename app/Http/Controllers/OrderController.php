@@ -15,7 +15,7 @@ class OrderController extends IndexController
         $view->with('order', $order);
 
         $payment_module = PaymentModuleFactory::make($order->payment);
-        $view->with('payment_module_form', !empty($payment_module) ? $payment_module->renderForm($order): '');
+        $view->with('payment_module_form', !empty($payment_module) ? $payment_module->renderForm(['order'=>$order]): '');
 
         $er = $request->session()->get('errors');
         if (!empty($er) && $er->has('payment_callback')) {
