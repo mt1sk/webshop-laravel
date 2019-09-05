@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Delivery;
 use App\Payment;
-use App\Payments\Module;
+use App\Modules\Payments\Module;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;

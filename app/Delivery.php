@@ -2,15 +2,19 @@
 
 namespace App;
 
+use App\Modules\CartModuleModel;
 use App\Traits\ModelImage;
-use Illuminate\Database\Eloquent\Model;
 
-class Delivery extends Model
+class Delivery extends CartModuleModel
 {
     use ModelImage;
 
     public static $originalDir = [
         'images/deliveries',
+    ];
+
+    protected $casts = [
+        'settings'  => 'array',
     ];
 
     protected function getId()

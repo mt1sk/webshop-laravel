@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Delivery;
+use App\Modules\Deliveries\Module;
 use App\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class DeliveryController extends IndexController
 {
@@ -47,6 +49,7 @@ class DeliveryController extends IndexController
         $all_payments = Payment::all();
 
         $view = view('admin.delivery_create');
+        $view->with('delivery_modules', Module::getModuleConfigList());
         $view->with('all_payments', $all_payments);
         $view->with('title', 'New delivery');
         return $view;
@@ -68,6 +71,7 @@ class DeliveryController extends IndexController
             'name'      => 'required',
             'price'     => 'required|numeric|min:0',
             'free_from' => 'required|numeric|min:0',
+            'module'    => ['required', Rule::in(array_keys(Module::getModuleConfigList()))],
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
@@ -80,6 +84,8 @@ class DeliveryController extends IndexController
         $delivery->price = $request->get('price');
         $delivery->free_from = $request->get('free_from');
         $delivery->enabled = $request->filled('enabled');
+        $delivery->module = $request->get('module');
+        $delivery->settings = $request->get('settings', []);
         $delivery->save();
 
         $file = $request->file('icon');
@@ -123,6 +129,8 @@ class DeliveryController extends IndexController
             $delivery->price = $request->old('price');
             $delivery->free_from = $request->old('free_from');
             $delivery->enabled = (bool)$request->old('enabled');
+            $delivery->module = $request->old('module');
+            $delivery->settings = $request->old('settings', []);
 
             $delivery_payments = $request->old('delivery_payments');
         } else {
@@ -133,6 +141,7 @@ class DeliveryController extends IndexController
 
         $view = view('admin.delivery_edit');
         $view->with('delivery', $delivery);
+        $view->with('delivery_modules', Module::getModuleConfigList());
         $view->with('all_payments', $all_payments);
         $view->with('delivery_payments', $delivery_payments);
         $view->with('title', $delivery->name);
@@ -156,6 +165,7 @@ class DeliveryController extends IndexController
             'name'      => 'required',
             'price'     => 'required|numeric|min:0',
             'free_from' => 'required|numeric|min:0',
+            'module'    => ['required', Rule::in(array_keys(Module::getModuleConfigList()))],
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
@@ -167,6 +177,8 @@ class DeliveryController extends IndexController
         $delivery->price = $request->get('price');
         $delivery->free_from = $request->get('free_from');
         $delivery->enabled = $request->filled('enabled');
+        $delivery->module = $request->get('module');
+        $delivery->settings = $request->get('settings', []);
         $delivery->save();
 
         if ($request->get('delete_icon')) {
