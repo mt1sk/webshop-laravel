@@ -17,6 +17,9 @@
                         <div id="delivery_block_{{$d->id}}" class="collapse @if($delivery->id == $d->id) show @endif" aria-labelledby="delivery_header_{{$d->id}}" data-parent="#delivery_methods">
                             <div class="card-body">
                                 <p>{!! $d->full_text !!}</p>
+                                <div class="pt-10">
+                                    {!! $d->moduleForm !!}
+                                </div>
                             </div>
                         </div>
                     </div>

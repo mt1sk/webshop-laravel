@@ -172,4 +172,7 @@
 
 @section('include_footer')
     <script src="/js/shop/delivery_payment.js"></script>
+    @foreach(\App\Modules\Deliveries\Module::getJS() as $js)
+        <script src="{{$js}}"></script>
+    @endforeach
 @endsection

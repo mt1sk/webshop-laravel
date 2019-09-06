@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Delivery;
+use App\Modules\Deliveries\DeliveryModuleFactory;
 use App\Order;
 use App\Purchase;
 use Illuminate\Http\Request;
@@ -105,6 +106,10 @@ class CartController extends IndexController
         }
 
         $deliveries = Delivery::all();
+        $deliveries->each(function ($d) {
+            $deliveryModule = DeliveryModuleFactory::make($d);
+            $d->moduleForm = !empty($deliveryModule) ? $deliveryModule->renderForm(['deliveryModule'=>$deliveryModule]) : '';
+        });
         $delivery = $deliveries->first();
         $delivery_payments = [];
         if (!empty($delivery)) {
