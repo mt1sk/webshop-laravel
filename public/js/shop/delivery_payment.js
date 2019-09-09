@@ -22,16 +22,22 @@ function deliveryChange(delivery_id) {
     }
     $('input[name="delivery_id"]').val(delivery_id);
 
+    $requestData = {
+        'delivery_id': delivery_id,
+        'payment_id': payment_id,
+    };
+    $('.fn_deliveries_module_input').each(function() {
+        $requestData[$(this).attr('name')] = $(this).val();
+    });
+
     $.ajax({
         url: delivery_payment_ajax_url,
         method: 'get',
-        data: {
-            'delivery_id': delivery_id,
-            'payment_id': payment_id,
-        },
+        data: $requestData,
         success: function (result) {
             if (result.success) {
                 $('.fn_cart_delivery_payment').replaceWith(result.cart_delivery_payment);
+                $('.fn_novaposhta_warehouse').trigger('change');
             }
         },
         error: error_ajax_cart_function,

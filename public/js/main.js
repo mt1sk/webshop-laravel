@@ -548,7 +548,11 @@ NOTE: main.js, All custom script and plugin activation script in this file.
     /*----------------------------
     17. Nice Select Activation
     ------------------------------ */
-    $('select').niceSelect();
+    $('select').each(function() {
+        if (!$(this).hasClass('fn_deliveries_module_input')) {
+            $(this).niceSelect();
+        }
+    });
     
     /*----------------------------
     18. Price Slider Activation

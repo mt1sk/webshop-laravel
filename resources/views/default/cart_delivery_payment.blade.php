@@ -1,4 +1,4 @@
-<div class="fn_cart_delivery_payment">
+<div class="fn_cart_delivery_payment" id="delivery_data">
     @if(!empty($delivery))
         <div class="payment-method">
             <input type="hidden" name="delivery_id" value="{{$delivery->id}}" />

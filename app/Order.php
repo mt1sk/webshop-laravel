@@ -10,6 +10,10 @@ class Order extends Model
 
     private $subtotalPrice;
 
+    protected $casts = [
+        'delivery_details' => 'array',
+    ];
+
     public function calculateOrderAttributes()
     {
         $this->productsCount = 0;

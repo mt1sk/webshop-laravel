@@ -27,6 +27,18 @@ class CartController extends IndexController
             return redirect()->route('cart_page')->withInput()->withErrors($validator);
         }
 
+        $deliveryDetails = [];
+        $delivery = Delivery::find($request->get('delivery_id'));
+        $deliveryModule = DeliveryModuleFactory::make($delivery);
+        if (!empty($deliveryModule)) {
+            $errors = $deliveryModule->validateCheckoutData();
+            if (!empty($errors)) {
+                return redirect()->route('cart_page')->withInput()->withErrors($errors, 'delivery');
+            }
+
+            $deliveryDetails = $deliveryModule->getCheckoutData();
+        }
+
         $cart = Cart::currentObject();
         $order = new Order();
         DB::beginTransaction();
@@ -38,12 +50,13 @@ class CartController extends IndexController
             $order->comment = $request->get('comment');
             $order->url = uniqid();
             $order->user_id = Auth::id();
-            $order->delivery_id = $request->get('delivery_id');
+            $order->delivery_id = $delivery ? $delivery->id : null;
             $order->payment_id = $request->get('payment_id');
             $order->delivery_price = 0;
-            if (!empty($order->delivery_id) && ($delivery = Delivery::find($order->delivery_id)) &&
+            $order->delivery_details = $deliveryDetails;
+            if (!empty($order->delivery_id) && $delivery &&
                     $delivery->price > 0 && $delivery->free_from > $cart->totalCost) {
-                $order->delivery_price = $delivery->price;
+                $order->delivery_price = $deliveryModule ? $deliveryModule->getPrice() : $delivery->price;
             }
             $order->total_price = $cart->totalCost + $order->delivery_price;
             if (!empty($cart->coupon)) {
@@ -87,7 +100,7 @@ class CartController extends IndexController
 
         $er = $request->session()->get('errors');
         if (!empty($er)) {
-            $data['go_to_anchor'] = 'personal_data';
+            $data['go_to_anchor'] = $er->hasBag('delivery') ? 'delivery_data' : 'personal_data';
             $data['name'] = $request->old('name');
             $data['email'] = $request->old('email');
             $data['phone'] = $request->old('phone');
@@ -105,16 +118,19 @@ class CartController extends IndexController
             $data['coupon_code'] = $coupon->code;
         }
 
-        $deliveries = Delivery::all();
+        $deliveries = Delivery::all()->keyBy('id');
         $deliveries->each(function ($d) {
             $deliveryModule = DeliveryModuleFactory::make($d);
-            $d->moduleForm = !empty($deliveryModule) ? $deliveryModule->renderForm(['deliveryModule'=>$deliveryModule]) : '';
+            $d->price = $deliveryModule->getPrice('old');
+            $d->moduleForm = !empty($deliveryModule) ? $deliveryModule->renderForm([], 'old') : '';
         });
-        $delivery = $deliveries->first();
+        $delivery_id = $request->old('delivery_id');
+        $delivery = $deliveries->has($delivery_id) ? $deliveries->get($delivery_id) : $deliveries->first();
         $delivery_payments = [];
         if (!empty($delivery)) {
-            $delivery_payments = $delivery->payments->all();
-            $data['payment'] = reset($delivery_payments);
+            $delivery_payments = $delivery->payments->keyBy('id');
+            $payment_id = $request->old('payment_id');
+            $data['payment'] = $delivery_payments->has($payment_id) ? $delivery_payments->get($payment_id) : $delivery_payments->first();
 
             $cart = Cart::currentObject();
             foreach ($delivery_payments as $payment) {

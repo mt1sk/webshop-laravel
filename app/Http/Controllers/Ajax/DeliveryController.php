@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Ajax;
 
 use App\Cart;
 use App\Delivery;
+use App\Modules\Deliveries\DeliveryModuleFactory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,12 +16,18 @@ class DeliveryController extends Controller
         if (empty($delivery_id)) {
             return response()->json(['success'=>0, 'error_message'=>'Empty delivery']);
         }
-        $delivery = Delivery::find($delivery_id);
-        if (empty($delivery)) {
+
+        $deliveries = Delivery::all()->keyBy('id');
+        if (!$deliveries->has($delivery_id)) {
             return response()->json(['success'=>0, 'error_message'=>'Delivery not found']);
         }
+        $delivery = $deliveries->get($delivery_id);
 
-        $deliveries = Delivery::all();
+        $deliveries->each(function ($d) {
+            $deliveryModule = DeliveryModuleFactory::make($d);
+            $d->price = $deliveryModule->getPrice();
+            $d->moduleForm = !empty($deliveryModule) ? $deliveryModule->renderForm() : '';
+        });
         $cart = Cart::currentObject();
 
         $delivery_payments = $delivery->payments->keyBy('id')->all();
